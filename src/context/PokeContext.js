@@ -4,17 +4,32 @@ const PokeContext = React.createContext()
 const localState = JSON.parse(localStorage.getItem('pokeState'))
 
 const initialState = {
-  theme: 'light',
+    theme: 'light',
+    pokedex: [],
 }
 
 function pokeReducer(state, action) {
-  switch (action.type) {
-    case 'switchTheme': {
-      return {
-        ...state,
-        theme: action.payload === 'light' ? 'dark' : 'light',
-      }
-    }
+    switch (action.type) {
+        case 'switchTheme': {
+            return {
+                ...state,
+                theme: action.payload === 'light' ? 'dark' : 'light',
+            }
+        }
+        case 'storePoke': {
+            return {
+                ...state,
+                pokedex: action.payload,
+            }
+        }
+        case 'delPoke': {
+            return {
+                ...state,
+                pokedex: state.pokedex.filter(
+                    (pokemon) => pokemon.id !== action.payload
+                ),
+            }
+        }
 
     default: {
       return state

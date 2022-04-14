@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { Grid, Button, Typography } from '@mui/material'
 import PokemonCard from '../components/PokemonCard/PokemonCard'
 import { getAllPokemon, getPokemon } from '../services/usePokeApi'
+import { PokeContext } from '../context/PokeContext'
 
 export default function AllPokemon() {
-  const [pokemonData, setPokemonData] = useState([])
   const [nextUrl, setNextUrl] = useState('')
   const [previousUrl, setPreviousUrl] = useState('')
   const [loading, setLoading] = useState(true)
   const initialUrl = 'https://pokeapi.co/api/v2/pokemon'
+  const { pokeState, pokeDispatch } = React.useContext(PokeContext)
 
   useEffect(() => {
     async function fetchData() {
@@ -20,8 +21,19 @@ export default function AllPokemon() {
       setLoading(false)
     }
     fetchData()
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setLoading, pokeDispatch])
 
+  const loadingPokemon = async (data) => {
+    let _pokemonData = await Promise.all(
+      data.map(async (pokemon) => {
+        let pokemonRecord = await getPokemon(pokemon.url)
+        return pokemonRecord
+      })
+    )
+
+    pokeDispatch({ type: 'storePoke', payload: _pokemonData })
+  }
   const nextData = async () => {
     setLoading(true)
     let data = await getAllPokemon(nextUrl)
@@ -41,15 +53,6 @@ export default function AllPokemon() {
     setLoading(false)
   }
 
-  const loadingPokemon = async (data) => {
-    let _pokemonData = await Promise.all(
-      data.map(async (pokemon) => {
-        let pokemonRecord = await getPokemon(pokemon.url)
-        return pokemonRecord
-      })
-    )
-    setPokemonData(_pokemonData)
-  }
   return (
     <>
       {loading ? (
@@ -69,7 +72,7 @@ export default function AllPokemon() {
               lg={10}
               xl={8}
             >
-              {pokemonData.map((pokemon, i) => {
+              {pokeState.pokedex.map((pokemon, i) => {
                 return (
                   <Grid item lg={3} md={4} sm={6} xs={12} key={i}>
                     <PokemonCard pokemon={pokemon} />
