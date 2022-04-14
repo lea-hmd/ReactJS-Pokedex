@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom'
 import { Grid } from '@mui/material'
 import PokemonCard from '../components/PokemonCard/PokemonCard'
 import { getAllPokemon, getPokemon } from '../services/usePokeApi'
-import AllPokemon from './AllPokemon'
 import Header from '../components/Common/Header'
 import { PokeContext } from '../context/PokeContext'
 
 function Layout() {
-    const [pokemonData, setPokemonData] = useState([])
+    
     const [nextUrl, setNextUrl] = useState('')
     const [previousUrl, setPreviousUrl] = useState('')
     const [setLoading] = useState(true)
     const initialUrl = 'https://pokeapi.co/api/v2/pokemon'
-    const { pokeDispatch } = React.useContext(PokeContext)
+    const { pokeState , pokeDispatch } = React.useContext(PokeContext)
 
     useEffect(() => {
         async function fetchData() {
             let response = await getAllPokemon(initialUrl)
-            pokeDispatch({ type: 'storePoke', payload: response.results })
             setNextUrl(response.next)
             setPreviousUrl(response.previous)
             let pokemon = await loadingPokemon(response.results)
@@ -26,6 +23,7 @@ function Layout() {
             setLoading(false)
         }
         fetchData()
+       // eslint-disable-next-line react-hooks/exhaustive-deps 
     }, [setLoading, pokeDispatch])
 
     const loadingPokemon = async (data) => {
@@ -36,7 +34,7 @@ function Layout() {
             })
         )
 
-        setPokemonData(_pokemonData)
+        pokeDispatch({ type: 'storePoke', payload: _pokemonData })
     }
     const next = async () => {
         setLoading(true)
@@ -56,12 +54,13 @@ function Layout() {
         setPreviousUrl(data.previous)
         setLoading(false)
     }
+
     return (
         <>
             <Header />
             <Grid container justifyContent="center" alignItems="center">
                 <Grid container item xs={10}>
-                    {pokemonData.map((pokemon, i) => {
+                    {pokeState.pokedex.map((pokemon, i) => {
                         return (
                             <Grid item xs={4} key={i}>
                                 <PokemonCard pokemon={pokemon} />
@@ -75,9 +74,6 @@ function Layout() {
                 <button onClick={prev}>Prev</button>
                 <button onClick={next}>Next</button>
             </div>
-            <Routes>
-                <Route exact path="/AllPokemon" component={AllPokemon} />
-            </Routes>
         </>
     )
 }

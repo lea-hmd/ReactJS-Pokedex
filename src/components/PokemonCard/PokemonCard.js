@@ -1,6 +1,9 @@
 import './style.css'
+import { PokeContext } from '../../context/PokeContext'
+import React from 'react'
 
 export default function PokemonCard({ pokemon }) {
+    const { pokeDispatch } = React.useContext(PokeContext)
     return (
         <div className="Card">
             <div className="Card__img">
@@ -27,6 +30,16 @@ export default function PokemonCard({ pokemon }) {
                         {pokemon.abilities[0].ability.name}
                     </p>
                 </div>
+            </div>
+            <div>
+                <button>Update</button>
+                <button
+                    onClick={() =>
+                        pokeDispatch({ type: 'delPoke', payload: pokemon.id })
+                    }
+                >
+                    Delete
+                </button>
             </div>
         </div>
     )

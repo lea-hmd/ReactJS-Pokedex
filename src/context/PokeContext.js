@@ -5,6 +5,7 @@ const localState = JSON.parse(localStorage.getItem('pokeState'))
 
 const initialState = {
     theme: 'light',
+    pokedex : [],
 }
 
 function pokeReducer(state, action) {
@@ -19,6 +20,12 @@ function pokeReducer(state, action) {
             return {
                 ...state,
                 pokedex: action.payload,
+            }
+        }
+        case 'delPoke' : {
+            return {
+                ...state, 
+                pokedex : state.pokedex.filter((pokemon)=>pokemon.id!==action.payload)
             }
         }
 
