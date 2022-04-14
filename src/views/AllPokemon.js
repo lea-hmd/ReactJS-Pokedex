@@ -4,6 +4,7 @@ export default function AllPokemon() {
     return (
         <>
             <Typography>ALLPOKEMON TEST</Typography>
+            
         </>
     )
 }

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom'
 import { Grid } from '@mui/material'
 import PokemonCard from '../components/PokemonCard/PokemonCard'
 import { getAllPokemon, getPokemon } from '../services/usePokeApi'
-import AllPokemon from './AllPokemon'
 import Header from '../components/Common/Header'
+
 function Layout() {
     const [pokemonData, setPokemonData] = useState([])
     const [nextUrl, setNextUrl] = useState('')
@@ -71,9 +70,6 @@ function Layout() {
                 <button onClick={prev}>Prev</button>
                 <button onClick={next}>Next</button>
             </div>
-            <Routes>
-                <Route exact path="/AllPokemon" component={AllPokemon} />
-            </Routes>
         </>
     )
 }
