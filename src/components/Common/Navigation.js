@@ -9,8 +9,9 @@ function Navigation() {
                     <li>Details</li>
                 </Link>
 
-                <Link/>
+                <Link to="/AllPokemons" />
                 <li>Tous les Pokemons</li>
+                <Link />
             </ul>
         </div>
     )

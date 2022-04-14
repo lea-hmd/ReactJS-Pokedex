@@ -1,6 +1,6 @@
 import './App.css'
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Layout from './views/Layout'
 import Navigation from './components/Common/Navigation'
 import AllPokemon from './views/AllPokemon'
