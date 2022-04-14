@@ -3,6 +3,7 @@ import { Grid, Typography, Button } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { PokeContext } from '../../context/PokeContext'
 import React from 'react'
+import TypeColor from './TypeColor'
 
 const useStyles = makeStyles({
   card: { borderRadius: '5px', background: '#fff' },
@@ -29,6 +30,24 @@ export default function PokemonCard({ pokemon }) {
       <Typography fontFamily="Roboto" className="Card__name" mt={4}>
         {pokemon.name}
       </Typography>
+      <Grid container justifyContent="center">
+        {pokemon.types.map((type) => {
+          return (
+            <Typography
+              color="white"
+              borderRadius="3px"
+              p={1}
+              m={1}
+              sx={{
+                backgroundColor: TypeColor[type.type.name],
+                display: 'inline-block',
+              }}
+            >
+              {type.type.name}
+            </Typography>
+          )
+        })}
+      </Grid>
       <Grid container justifyContent="center" mt={2}>
         <Button
           onClick={() => pokeDispatch({ type: 'delPoke', payload: pokemon.id })}
