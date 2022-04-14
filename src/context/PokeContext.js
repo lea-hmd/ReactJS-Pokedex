@@ -18,7 +18,7 @@ function pokeReducer(state, action) {
         case 'storePoke': {
             return {
                 ...state,
-                pokedex : action.payload
+                pokedex: action.payload,
             }
         }
 
