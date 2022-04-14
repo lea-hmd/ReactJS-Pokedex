@@ -15,6 +15,12 @@ function pokeReducer(state, action) {
                 theme: action.payload === 'light' ? 'dark' : 'light',
             }
         }
+        case 'storePoke': {
+            return {
+                ...state,
+                pokedex : action.payload
+            }
+        }
 
         default: {
             return state

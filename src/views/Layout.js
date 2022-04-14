@@ -5,16 +5,20 @@ import PokemonCard from '../components/PokemonCard/PokemonCard'
 import { getAllPokemon, getPokemon } from '../services/usePokeApi'
 import AllPokemon from './AllPokemon'
 import Header from '../components/Common/Header'
+import { PokeContext } from '../context/PokeContext'
+
 function Layout() {
     const [pokemonData, setPokemonData] = useState([])
     const [nextUrl, setNextUrl] = useState('')
     const [previousUrl, setPreviousUrl] = useState('')
     const [setLoading] = useState(true)
     const initialUrl = 'https://pokeapi.co/api/v2/pokemon'
+    const { pokeDispatch } = React.useContext(PokeContext)
 
     useEffect(() => {
         async function fetchData() {
             let response = await getAllPokemon(initialUrl)
+            pokeDispatch({ type: 'storePoke', payload: response.results })
             setNextUrl(response.next)
             setPreviousUrl(response.previous)
             let pokemon = await loadingPokemon(response.results)
@@ -22,7 +26,7 @@ function Layout() {
             setLoading(false)
         }
         fetchData()
-    }, [setLoading])
+    }, [setLoading, pokeDispatch])
 
     const loadingPokemon = async (data) => {
         let _pokemonData = await Promise.all(
