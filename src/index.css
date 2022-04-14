@@ -3,7 +3,6 @@ body {
 }
 
 @font-face {
-font-family: "Pokemon";
-src: local("Pokemon"),
- url("./fonts/Pokemon\ Solid.ttf") format("truetype");
+    font-family: 'Pokemon';
+    src: local('Pokemon'), url('./fonts/Pokemon\ Solid.ttf') format('truetype');
 }

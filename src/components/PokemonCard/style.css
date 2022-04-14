@@ -5,7 +5,7 @@ p {
 .Card {
     background: white;
     /* border: 3px solid #FF0000; */
-    border: 6px solid #F5E97E;
+    border: 6px solid #f5e97e;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -16,7 +16,7 @@ p {
 }
 
 .Card:hover {
-    border-color: #FF0000;
+    border-color: #ff0000;
     transform: scale(1.1);
 }
 
@@ -37,7 +37,7 @@ p {
 
 .Card__types {
     display: flex;
-    justify-content: center;    
+    justify-content: center;
 }
 
 .Card__type {
@@ -46,7 +46,6 @@ p {
     border-radius: 5px;
     color: #fff;
 }
-
 
 .Card__info {
     margin-left: 10px;
