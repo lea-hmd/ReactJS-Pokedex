@@ -6,12 +6,11 @@ import Header from '../components/Common/Header'
 import { PokeContext } from '../context/PokeContext'
 
 function Layout() {
-    
     const [nextUrl, setNextUrl] = useState('')
     const [previousUrl, setPreviousUrl] = useState('')
     const [setLoading] = useState(true)
     const initialUrl = 'https://pokeapi.co/api/v2/pokemon'
-    const { pokeState , pokeDispatch } = React.useContext(PokeContext)
+    const { pokeState, pokeDispatch } = React.useContext(PokeContext)
 
     useEffect(() => {
         async function fetchData() {
@@ -23,7 +22,7 @@ function Layout() {
             setLoading(false)
         }
         fetchData()
-       // eslint-disable-next-line react-hooks/exhaustive-deps 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [setLoading, pokeDispatch])
 
     const loadingPokemon = async (data) => {
