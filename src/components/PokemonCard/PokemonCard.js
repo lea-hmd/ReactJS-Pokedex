@@ -1,9 +1,9 @@
 import './style.css'
 import { Grid, Typography, Button } from '@mui/material'
 import { makeStyles } from '@mui/styles'
-import { PokeContext } from '../../context/PokeContext'
 import React from 'react'
 import TypeColor from './TypeColor'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles({
   card: { borderRadius: '5px', background: '#fff' },
@@ -11,7 +11,6 @@ const useStyles = makeStyles({
 
 export default function PokemonCard({ pokemon }) {
   const classes = useStyles()
-  const { pokeDispatch } = React.useContext(PokeContext)
   return (
     <Grid item className={classes.card} p={3}>
       <Grid
@@ -31,16 +30,18 @@ export default function PokemonCard({ pokemon }) {
         {pokemon.name}
       </Typography>
       <Grid container justifyContent="center">
-        {pokemon.types.map((type) => {
+        {pokemon.types.map((type, id) => {
           return (
             <Typography
               color="white"
               borderRadius="3px"
               p={1}
               m={1}
+              key={id}
               sx={{
                 backgroundColor: TypeColor[type.type.name],
                 display: 'inline-block',
+                textTransform: 'capitalize'
               }}
             >
               {type.type.name}
@@ -49,17 +50,20 @@ export default function PokemonCard({ pokemon }) {
         })}
       </Grid>
       <Grid container justifyContent="center" mt={2}>
-        <Button
-          onClick={() => pokeDispatch({ type: 'delPoke', payload: pokemon.id })}
-          sx={{
-            border: '2px #1c2a38 solid',
-            color: '#1c2a38',
-            margin: '10px',
-            borderRadius: '2px',
-          }}
-        >
-          Supprimer le pokémon
-        </Button>
+        <Link to={`/details/${pokemon.id}`}>
+          <Button
+            sx={{
+              border: '2px #1c2a38 solid',
+              backgroundColor: '#1c2a38',
+              color: 'white',
+              margin: '10px',
+              borderRadius: '2px',
+              '&:hover': { backgoundColor: 'white', color: '#1c2a38' },
+            }}
+          >
+            Détails
+          </Button>
+        </Link>
       </Grid>
     </Grid>
   )
