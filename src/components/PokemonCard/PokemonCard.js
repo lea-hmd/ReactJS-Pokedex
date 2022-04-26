@@ -41,7 +41,7 @@ export default function PokemonCard({ pokemon }) {
               sx={{
                 backgroundColor: TypeColor[type.type.name],
                 display: 'inline-block',
-                textTransform: 'capitalize'
+                textTransform: 'capitalize',
               }}
             >
               {type.type.name}
