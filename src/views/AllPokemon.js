@@ -59,9 +59,6 @@ export default function AllPokemon() {
 
   return (
     <>
-      <Button onClick={() => pokeDispatch({ type: 'delCustomPoke' })}>
-        RESET
-      </Button>
       {loading ? (
         <Typography variant="h5" color="white" textAlign="center">
           Chargement en cours ...
@@ -69,6 +66,59 @@ export default function AllPokemon() {
       ) : (
         <>
           <Grid container justifyContent="center" alignItems="center" mt={5}>
+            {' '}
+            <Grid
+              container
+              item
+              xs={10}
+              sm={10}
+              md={10}
+              lg={10}
+              xl={8}
+              mb={2}
+              justifyContent="left"
+            >
+              <Button
+                onClick={() => pokeDispatch({ type: 'delCustomPoke' })}
+                sx={{
+                  border: '2px white solid',
+                  color: 'white',
+                  margin: '10px',
+                }}
+              >
+                RESET
+              </Button>
+              <Button
+                sx={{
+                  border: '2px white solid',
+                  color: 'white',
+                  margin: '10px',
+                  background: '#c41010',
+                }}
+              >
+                Version Rouge
+              </Button>
+              <Button
+                sx={{
+                  border: '2px white solid',
+                  color: 'white',
+                  margin: '10px',
+                  background: '#005d8f',
+                }}
+              >
+                Version Bleue
+              </Button>
+              <Button
+                href="/add-pokemon"
+                sx={{
+                  border: '2px white solid',
+                  color: 'white',
+                  margin: '10px',
+                }}
+              >
+                Ajouter un pokémon
+              </Button>
+            </Grid>
             <Grid
               container
               spacing={4}
