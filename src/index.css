@@ -5,5 +5,5 @@ body {
 
 @font-face {
   font-family: 'Pokemon';
-  src: local('Pokemon'), url('./fonts/Pokemon\ Hollow.ttf') format('truetype');
+  src: local('Pokemon'), url('./fonts/EvioliteRegular.ttf') format('truetype');
 }
