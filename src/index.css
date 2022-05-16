@@ -5,5 +5,13 @@ body {
 
 @font-face {
   font-family: 'Pokemon';
-  src: local('Pokemon'), url('./fonts/Pokemon\ Hollow.ttf') format('truetype');
+  src: local('Pokemon'), url('./fonts/EvioliteRegular.ttf') format('truetype');
+}
+
+.bodyBlue {
+  background-color: #005d8f;
+}
+
+.bodyRed {
+  background-color: #c41010;
 }
