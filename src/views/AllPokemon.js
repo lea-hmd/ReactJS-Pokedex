@@ -8,8 +8,12 @@ export default function AllPokemon() {
   const [nextUrl, setNextUrl] = useState('')
   const [previousUrl, setPreviousUrl] = useState('')
   const [loading, setLoading] = useState(true)
-  const initialUrl = 'https://pokeapi.co/api/v2/pokemon'
+  const initialUrl = 'https://pokeapi.co/api/v2/pokemon?limit=10'
   const { pokeState, pokeDispatch } = React.useContext(PokeContext)
+  const data =
+    pokeState.customPokedex.length === 0
+      ? pokeState.pokedex
+      : pokeState.customPokedex
 
   useEffect(() => {
     async function fetchData() {
@@ -62,6 +66,59 @@ export default function AllPokemon() {
       ) : (
         <>
           <Grid container justifyContent="center" alignItems="center" mt={5}>
+            {' '}
+            <Grid
+              container
+              item
+              xs={10}
+              sm={10}
+              md={10}
+              lg={10}
+              xl={8}
+              mb={2}
+              justifyContent="left"
+            >
+              <Button
+                onClick={() => pokeDispatch({ type: 'delCustomPoke' })}
+                sx={{
+                  border: '2px white solid',
+                  color: 'white',
+                  margin: '10px',
+                }}
+              >
+                RESET
+              </Button>
+              <Button
+                sx={{
+                  border: '2px white solid',
+                  color: 'white',
+                  margin: '10px',
+                  background: '#c41010',
+                }}
+              >
+                Version Rouge
+              </Button>
+              <Button
+                sx={{
+                  border: '2px white solid',
+                  color: 'white',
+                  margin: '10px',
+                  background: '#005d8f',
+                }}
+              >
+                Version Bleue
+              </Button>
+              <Button
+                href="/add-pokemon"
+                sx={{
+                  border: '2px white solid',
+                  color: 'white',
+                  margin: '10px',
+                }}
+              >
+                Ajouter un pokémon
+              </Button>
+            </Grid>
             <Grid
               container
               spacing={4}
@@ -72,7 +129,7 @@ export default function AllPokemon() {
               lg={10}
               xl={8}
             >
-              {pokeState.pokedex.map((pokemon, i) => {
+              {data.map((pokemon, i) => {
                 return (
                   <Grid item lg={3} md={4} sm={6} xs={12} key={i}>
                     <PokemonCard pokemon={pokemon} />
@@ -82,14 +139,22 @@ export default function AllPokemon() {
             </Grid>
           </Grid>
           <Grid container justifyContent="center" mt={4}>
+            {previousUrl ? (
+              <Button
+                onClick={previousData}
+                sx={{
+                  border: '2px white solid',
+                  color: 'white',
+                  margin: '10px',
+                }}
+              >
+                Pokémon précédents
+              </Button>
+            ) : (
+              ''
+            )}
             <Button
               onClick={nextData}
-              sx={{ border: '2px white solid', color: 'white', margin: '10px' }}
-            >
-              Pokémon précédents
-            </Button>
-            <Button
-              onClick={previousData}
               sx={{ border: '2px white solid', color: 'white', margin: '10px' }}
             >
               Pokémon suivants
