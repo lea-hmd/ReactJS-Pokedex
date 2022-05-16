@@ -6,6 +6,7 @@ const localState = JSON.parse(localStorage.getItem('pokeState'))
 const initialState = {
   theme: 'light',
   pokedex: [],
+  customPokedex: [],
 }
 
 function pokeReducer(state, action) {
@@ -17,17 +18,27 @@ function pokeReducer(state, action) {
       }
     }
     case 'storePoke': {
+      const data = action.payload
       return {
         ...state,
-        pokedex: action.payload,
+        pokedex: data,
       }
     }
+
     case 'delPoke': {
+      const data = state.customPokedex.length === 0 ? state.pokedex : state.customPokedex
       return {
         ...state,
-        pokedex: state.pokedex.filter(
+        customPokedex: data.filter(
           (pokemon) => pokemon.id !== action.payload
         ),
+      }
+    }
+
+    case 'delCustomPoke': {
+      return {
+        ...state,
+        customPokedex: []
       }
     }
 

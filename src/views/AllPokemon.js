@@ -8,9 +8,11 @@ export default function AllPokemon() {
   const [nextUrl, setNextUrl] = useState('')
   const [previousUrl, setPreviousUrl] = useState('')
   const [loading, setLoading] = useState(true)
-  const initialUrl = 'https://pokeapi.co/api/v2/pokemon'
+  const initialUrl = 'https://pokeapi.co/api/v2/pokemon?limit=10'
   const { pokeState, pokeDispatch } = React.useContext(PokeContext)
+  const data = pokeState.customPokedex.length === 0 ? pokeState.pokedex : pokeState.customPokedex
 
+  
   useEffect(() => {
     async function fetchData() {
       let response = await getAllPokemon(initialUrl)
@@ -55,6 +57,9 @@ export default function AllPokemon() {
 
   return (
     <>
+    <Button onClick={() => pokeDispatch({type: 'delCustomPoke'})}>
+      RESET
+    </Button>
       {loading ? (
         <Typography variant="h5" color="white" textAlign="center">
           Chargement en cours ...
@@ -72,7 +77,7 @@ export default function AllPokemon() {
               lg={10}
               xl={8}
             >
-              {pokeState.pokedex.map((pokemon, i) => {
+              {data.map((pokemon, i) => {
                 return (
                   <Grid item lg={3} md={4} sm={6} xs={12} key={i}>
                     <PokemonCard pokemon={pokemon} />
