@@ -82,14 +82,22 @@ export default function AllPokemon() {
             </Grid>
           </Grid>
           <Grid container justifyContent="center" mt={4}>
+            {previousUrl ? (
+              <Button
+                onClick={previousData}
+                sx={{
+                  border: '2px white solid',
+                  color: 'white',
+                  margin: '10px',
+                }}
+              >
+                Pokémon précédents
+              </Button>
+            ) : (
+              ''
+            )}
             <Button
               onClick={nextData}
-              sx={{ border: '2px white solid', color: 'white', margin: '10px' }}
-            >
-              Pokémon précédents
-            </Button>
-            <Button
-              onClick={previousData}
               sx={{ border: '2px white solid', color: 'white', margin: '10px' }}
             >
               Pokémon suivants
