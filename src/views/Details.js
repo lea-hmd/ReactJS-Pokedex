@@ -27,7 +27,7 @@ export default function Details() {
             xs={10}
             pb={5}
           >
-            <Grid container m='auto' item xs={10} md={11}>
+            <Grid container m="auto" item xs={10} md={11}>
               <Grid container justifyContent={'center'} mb={5}>
                 <Typography
                   variant="h2"
