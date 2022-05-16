@@ -8,7 +8,7 @@ import TypeColor from '../components/PokemonCard/TypeColor'
 export default function Details() {
   const { pokemonId } = useParams()
 
-  const { pokeState } = React.useContext(PokeContext)
+  const { pokeState, pokeDispatch } = React.useContext(PokeContext)
 
   const [render, setRender] = React.useState(null)
   React.useEffect(() => {
@@ -37,26 +37,6 @@ export default function Details() {
               </Typography>
             </Grid>
             <Grid item lg={5} container alignItems="center">
-              <Grid container justifyContent="center">
-                {thisPokemon.types.map((type, id) => {
-                  return (
-                    <Typography
-                      color="white"
-                      borderRadius="3px"
-                      p={1}
-                      m={1}
-                      key={id}
-                      sx={{
-                        backgroundColor: TypeColor[type.type.name],
-                        display: 'inline-block',
-                        textTransform: 'capitalize',
-                      }}
-                    >
-                      {type.type.name}
-                    </Typography>
-                  )
-                })}
-              </Grid>
               <Grid
                 container
                 justifyContent="center"
@@ -206,6 +186,33 @@ export default function Details() {
                       >
                         {thisPokemon.height * 10 + ' cm'}
                       </Typography>
+                    </Grid>{' '}
+                    <Grid item>
+                      <Typography
+                        variant="body2"
+                        textTransform="capitalize"
+                        mr={1}
+                      >
+                        Type :
+                      </Typography>
+                      {thisPokemon.types.map((type, id) => {
+                        return (
+                          <Typography
+                            color="white"
+                            borderRadius="3px"
+                            p={0.5}
+                            m={1}
+                            key={id}
+                            sx={{
+                              backgroundColor: TypeColor[type.type.name],
+                              display: 'inline-block',
+                              textTransform: 'capitalize',
+                            }}
+                          >
+                            {type.type.name}
+                          </Typography>
+                        )
+                      })}
                     </Grid>
                   </Grid>
                 </Grid>
@@ -246,19 +253,50 @@ export default function Details() {
                 </Grid>
               </Grid>
             </Grid>
-            <Button
-              href="/"
-              sx={{
-                border: '2px #1c2a38 solid',
-                backgroundColor: '#1c2a38',
-                color: 'white',
-                margin: '10px',
-                borderRadius: '2px',
-                '&:hover': { backgoundColor: 'white', color: '#1c2a38' },
-              }}
-            >
-              Retour
-            </Button>
+            <Grid container justifyContent="left">
+              <Button
+                href="/"
+                sx={{
+                  border: '2px #1c2a38 solid',
+                  backgroundColor: '#1c2a38',
+                  color: 'white',
+                  margin: '10px',
+                  borderRadius: '2px',
+                  '&:hover': { backgoundColor: 'white', color: '#1c2a38' },
+                }}
+              >
+                Modifier
+              </Button>{' '}
+              <Button
+                onClick={() =>
+                  pokeDispatch({ type: 'delPoke', payload: thisPokemon.id })
+                }
+                sx={{
+                  border: '2px #ff1f1f solid',
+                  backgroundColor: '#ff1f1f',
+                  color: 'white',
+                  margin: '10px',
+                  borderRadius: '2px',
+                  '&:hover': { backgoundColor: 'white', color: '#1c2a38' },
+                }}
+              >
+                Supprimer
+              </Button>
+            </Grid>
+            <Grid container justifyContent="right">
+              <Button
+                href="/"
+                sx={{
+                  border: '2px #1c2a38 solid',
+                  color: '#1c2a38',
+                  backgroundColor: 'white',
+                  margin: '10px',
+                  borderRadius: '2px',
+                }}
+              >
+                Retour
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
       </>
