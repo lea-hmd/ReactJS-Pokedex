@@ -26,19 +26,18 @@ function pokeReducer(state, action) {
     }
 
     case 'delPoke': {
-      const data = state.customPokedex.length === 0 ? state.pokedex : state.customPokedex
+      const data =
+        state.customPokedex.length === 0 ? state.pokedex : state.customPokedex
       return {
         ...state,
-        customPokedex: data.filter(
-          (pokemon) => pokemon.id !== action.payload
-        ),
+        customPokedex: data.filter((pokemon) => pokemon.id !== action.payload),
       }
     }
 
     case 'delCustomPoke': {
       return {
         ...state,
-        customPokedex: []
+        customPokedex: [],
       }
     }
 

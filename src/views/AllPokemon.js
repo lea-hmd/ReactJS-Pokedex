@@ -10,9 +10,11 @@ export default function AllPokemon() {
   const [loading, setLoading] = useState(true)
   const initialUrl = 'https://pokeapi.co/api/v2/pokemon?limit=10'
   const { pokeState, pokeDispatch } = React.useContext(PokeContext)
-  const data = pokeState.customPokedex.length === 0 ? pokeState.pokedex : pokeState.customPokedex
+  const data =
+    pokeState.customPokedex.length === 0
+      ? pokeState.pokedex
+      : pokeState.customPokedex
 
-  
   useEffect(() => {
     async function fetchData() {
       let response = await getAllPokemon(initialUrl)
@@ -57,9 +59,9 @@ export default function AllPokemon() {
 
   return (
     <>
-    <Button onClick={() => pokeDispatch({type: 'delCustomPoke'})}>
-      RESET
-    </Button>
+      <Button onClick={() => pokeDispatch({ type: 'delCustomPoke' })}>
+        RESET
+      </Button>
       {loading ? (
         <Typography variant="h5" color="white" textAlign="center">
           Chargement en cours ...
