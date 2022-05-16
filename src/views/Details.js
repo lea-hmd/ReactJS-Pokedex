@@ -141,9 +141,9 @@ export default function Details() {
                       >
                         Abilités :
                       </Typography>
-                      {thisPokemon.abilities.map(({ ability, id }) => {
+                      {thisPokemon.abilities.map(({ ability }) => {
                         return (
-                          <Grid item mr={2} key={id}>
+                          <Grid item mr={2} key={ability.name}>
                             <Typography
                               variant="body2"
                               textTransform="capitalize"
@@ -195,14 +195,14 @@ export default function Details() {
                       >
                         Type :
                       </Typography>
-                      {thisPokemon.types.map((type, id) => {
+                      {thisPokemon.types.map((type) => {
                         return (
                           <Typography
                             color="white"
                             borderRadius="3px"
                             p={0.5}
                             m={1}
-                            key={id}
+                            key={type.type.name}
                             sx={{
                               backgroundColor: TypeColor[type.type.name],
                               display: 'inline-block',
@@ -228,9 +228,9 @@ export default function Details() {
                   container
                   sx={{ background: '#f2f5f7', borderRadius: '5px' }}
                 >
-                  {thisPokemon.stats.map(({ id, stat, base_stat: nb }) => {
+                  {thisPokemon.stats.map(({ stat, base_stat: nb }) => {
                     return (
-                      <Grid item xs={4} key={id}>
+                      <Grid item xs={4} key={stat.name}>
                         <Typography
                           variant="body2"
                           textTransform="capitalize"
