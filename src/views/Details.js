@@ -76,7 +76,9 @@ export default function Details() {
                     Face antérieure
                   </Typography>
                   <Grid container justifyContent="center">
-                    <img src={thisPokemon?.sprites.front_default} alt="" />
+                    {thisPokemon && (
+                      <img src={thisPokemon?.sprites.front_default} alt="" />
+                    )}
                   </Grid>
                 </Grid>
                 <Grid
@@ -90,7 +92,9 @@ export default function Details() {
                     Face postérieure
                   </Typography>
                   <Grid container justifyContent="center">
-                    <img src={thisPokemon?.sprites.back_default} alt="" />
+                    {thisPokemon && (
+                      <img src={thisPokemon?.sprites.back_default} alt="" />
+                    )}
                   </Grid>
                 </Grid>{' '}
               </Grid>
@@ -116,22 +120,10 @@ export default function Details() {
                     Face antérieure - Shiny
                   </Typography>
                   <Grid container justifyContent="center">
-                    <img src={thisPokemon?.sprites.front_shiny} alt="" />
+                    {thisPokemon && (
+                      <img src={thisPokemon?.sprites.front_shiny} alt="" />
+                    )}
                   </Grid>
-                  <Grid
-                    xs={6}
-                    item
-                    container
-                    justifyContent="center"
-                    alignItems="center"
-                  >
-                    <Typography variant="body2" color="white" fontWeight="bold">
-                      Face postérieure
-                    </Typography>
-                    <Grid container justifyContent="center">
-                      <img src={thisPokemon.sprites.back_default} alt="" />
-                    </Grid>
-                  </Grid>{' '}
                 </Grid>
                 <Grid
                   xs={6}
@@ -144,7 +136,9 @@ export default function Details() {
                     Face postérieure - Shiny
                   </Typography>
                   <Grid container justifyContent="center">
-                    <img src={thisPokemon?.sprites.back_shiny} alt="" />
+                    {thisPokemon && (
+                      <img src={thisPokemon?.sprites.back_shiny} alt="" />
+                    )}
                   </Grid>
                 </Grid>{' '}
               </Grid>
@@ -246,20 +240,6 @@ export default function Details() {
                       })}
                     </Grid>
                   </Grid>
-                  <Grid
-                    xs={6}
-                    item
-                    container
-                    justifyContent="center"
-                    alignItems="center"
-                  >
-                    <Typography variant="body2" color="white" fontWeight="bold">
-                      Face postérieure - Shiny
-                    </Typography>
-                    <Grid container justifyContent="center">
-                      <img src={thisPokemon.sprites.back_shiny} alt="" />
-                    </Grid>
-                  </Grid>{' '}
                 </Grid>
               </Grid>
               <Grid container item xs={12} lg={10} m="auto">
