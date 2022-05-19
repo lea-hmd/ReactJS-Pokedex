@@ -41,6 +41,21 @@ function pokeReducer(state, action) {
       }
     }
 
+    case 'upPoke': {
+      return {
+        ...state,
+        customPokedex: state.customPokedex.map((pokemon)=>{
+          if (pokemon.id === action.payload.id) {
+            return action.payload
+          }
+
+          else {
+            return pokemon
+          }
+        }),
+      }
+    }
+
     default: {
       return state
     }
