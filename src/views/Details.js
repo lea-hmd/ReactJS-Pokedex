@@ -4,11 +4,14 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { PokeContext } from '../context/PokeContext'
 import TypeColor from '../components/PokemonCard/TypeColor'
+import { useNavigate } from 'react-router-dom'
+import '../assets/style.css'
 
 export default function Details() {
   const { pokemonId } = useParams()
 
   const { pokeState, pokeDispatch } = React.useContext(PokeContext)
+  const navigate = useNavigate()
 
   const [render, setRender] = React.useState(null)
   React.useEffect(() => {
@@ -62,7 +65,11 @@ export default function Details() {
                       Face antérieure
                     </Typography>
                     <Grid container justifyContent="center">
-                      <img src={thisPokemon.sprites.front_default} alt="" />
+                      <img
+                        id="pokemonImg"
+                        src={thisPokemon.sprites.front_default}
+                        alt=""
+                      />
                     </Grid>
                   </Grid>
                   <Grid
@@ -76,7 +83,11 @@ export default function Details() {
                       Face postérieure
                     </Typography>
                     <Grid container justifyContent="center">
-                      <img src={thisPokemon.sprites.back_default} alt="" />
+                      <img
+                        id="pokemonImg"
+                        src={thisPokemon.sprites.back_default}
+                        alt=""
+                      />
                     </Grid>
                   </Grid>{' '}
                 </Grid>
@@ -102,7 +113,11 @@ export default function Details() {
                       Face antérieure - Shiny
                     </Typography>
                     <Grid container justifyContent="center">
-                      <img src={thisPokemon.sprites.front_shiny} alt="" />
+                      <img
+                        id="pokemonImg"
+                        src={thisPokemon.sprites.front_shiny}
+                        alt=""
+                      />
                     </Grid>
                   </Grid>
                   <Grid
@@ -116,7 +131,11 @@ export default function Details() {
                       Face postérieure - Shiny
                     </Typography>
                     <Grid container justifyContent="center">
-                      <img src={thisPokemon.sprites.back_shiny} alt="" />
+                      <img
+                        id="pokemonImg"
+                        src={thisPokemon.sprites.back_shiny}
+                        alt=""
+                      />
                     </Grid>
                   </Grid>{' '}
                 </Grid>
@@ -271,9 +290,10 @@ export default function Details() {
                   Modifier
                 </Button>{' '}
                 <Button
-                  onClick={() =>
+                  onClick={() => {
                     pokeDispatch({ type: 'delPoke', payload: thisPokemon.id })
-                  }
+                    navigate('/')
+                  }}
                   sx={{
                     border: '2px #ff1f1f solid',
                     backgroundColor: '#ff1f1f',
