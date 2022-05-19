@@ -41,10 +41,10 @@ function pokeReducer(state, action) {
       }
     }
 
-    case 'upPoke' : {
+    case 'upPoke': {
       return {
         ...state,
-        customPokedex : [] ,
+        customPokedex: [],
       }
     }
 
