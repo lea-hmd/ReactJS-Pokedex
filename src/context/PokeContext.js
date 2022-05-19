@@ -34,6 +34,13 @@ function pokeReducer(state, action) {
       }
     }
 
+    case 'addPoke' : {
+      return {
+        ...state,
+        customPokedex: [...state.customPokedex, action.payload]
+      }
+    }
+
     case 'delCustomPoke': {
       return {
         ...state,
