@@ -66,7 +66,13 @@ export default function AllPokemon() {
         </Typography>
       ) : (
         <>
-          <Grid id='konami' container justifyContent="center" alignItems="center" mt={5}>
+          <Grid
+            id="konami"
+            container
+            justifyContent="center"
+            alignItems="center"
+            mt={5}
+          >
             {' '}
             <Grid
               container

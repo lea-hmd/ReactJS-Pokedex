@@ -1,11 +1,13 @@
 #pokemonImg:hover {
   animation: rotate 2s infinite;
   cursor: pointer;
-  transform: scale(1.25)
+  transform: scale(1.25);
 }
 
 @keyframes rotate {
-  100% {transform: rotate(180deg);}
+  100% {
+    transform: rotate(180deg);
+  }
 }
 
 #pokemonCard:hover {
@@ -16,21 +18,23 @@
 
 #pokemonCard,
 #pokemonImg {
-cursor: pointer;
+  cursor: pointer;
 }
 
 @keyframes scale {
-  50% { transform: scale(1.05);}
+  50% {
+    transform: scale(1.05);
+  }
 }
 
-#konam i{
-animation: rotate 2s infinite;
+#konam i {
+  animation: rotate 2s infinite;
   cursor: pointer;
-  transform: scale(2)
+  transform: scale(2);
 }
 
-#titl e{
-animation: rotate 2s infinite;
+#titl e {
+  animation: rotate 2s infinite;
   cursor: pointer;
-  transform: scale(2)
+  transform: scale(2);
 }

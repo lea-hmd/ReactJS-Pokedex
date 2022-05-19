@@ -13,7 +13,7 @@ const useStyles = makeStyles({
 export default function PokemonCard({ pokemon }) {
   const classes = useStyles()
   return (
-    <Grid item id='pokemonCard' className={classes.card} p={3}>
+    <Grid item id="pokemonCard" className={classes.card} p={3}>
       <Grid
         container
         justifyContent="center"
@@ -24,7 +24,7 @@ export default function PokemonCard({ pokemon }) {
         }}
       >
         <Grid container justifyContent="center">
-          <img id='pokemonCardImg' src={pokemon.sprites.front_default} alt="" />
+          <img id="pokemonCardImg" src={pokemon.sprites.front_default} alt="" />
         </Grid>
       </Grid>
       <Typography fontFamily="Roboto" className="Card__name" mt={4}>
