@@ -24,7 +24,12 @@ function pokeReducer(state, action) {
         pokedex: data,
       }
     }
-
+    case 'addPoke': {
+      return {
+        ...state,
+        customPokedex: [...state.customPokedex, action.payload],
+      }
+    }
     case 'delPoke': {
       const data =
         state.customPokedex.length === 0 ? state.pokedex : state.customPokedex
@@ -51,7 +56,13 @@ function pokeReducer(state, action) {
     case 'upPoke': {
       return {
         ...state,
-        customPokedex: [],
+        customPokedex: state.customPokedex.map((pokemon) => {
+          if (pokemon.id === action.payload.id) {
+            return action.payload
+          } else {
+            return pokemon
+          }
+        }),
       }
     }
 
