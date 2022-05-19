@@ -10,7 +10,10 @@ export default function Details() {
 
   const { pokeState, pokeDispatch } = React.useContext(PokeContext)
 
+  const buttonRef = React.useRef(null)
+
   const [render, setRender] = React.useState(null)
+
   React.useEffect(() => {
     const thisPokemon = pokeState.pokedex.find(
       (pokemon) => pokemon.id === +pokemonId
@@ -258,8 +261,10 @@ export default function Details() {
               </Grid>
               <Grid container justifyContent="left" mt={2}>
                 <Button
-                  href="/"
-                  sx={{
+                  onClick={() => {
+                    buttonRef.current.style.display = 'block'
+                  }}
+                  style={{
                     border: '2px #1c2a38 solid',
                     backgroundColor: '#1c2a38',
                     color: 'white',
@@ -269,8 +274,25 @@ export default function Details() {
                   }}
                 >
                   Modifier
-                </Button>{' '}
+                </Button>
+                <Grid container justifyContent="right">
+                  <Button
+                    ref={buttonRef}
+                    style={{
+                      display: 'none',
+                      border: '2px #1c2a38 solid',
+                      backgroundColor: '#1c2a38',
+                      color: 'white',
+                      margin: '10px',
+                      borderRadius: '2px',
+                      '&:hover': { backgoundColor: 'white', color: '#1c2a38' },
+                    }}
+                  >
+                    TEST
+                  </Button>
+                </Grid>
                 <Button
+                  href="/"
                   onClick={() =>
                     pokeDispatch({ type: 'delPoke', payload: thisPokemon.id })
                   }
