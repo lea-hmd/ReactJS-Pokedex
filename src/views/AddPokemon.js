@@ -11,6 +11,7 @@ import {
 } from '@mui/material'
 import { PokeContext } from '../context/PokeContext'
 import { useNavigate } from 'react-router-dom'
+import { Typography } from '@mui/material'
 
 export default function AddPokemon() {
   const { pokeDispatch } = React.useContext(PokeContext)
@@ -35,7 +36,6 @@ export default function AddPokemon() {
     types: [
       { slot: 1, type: { name: '' } },
       { slot: 2, type: { name: '' } },
-      { slot: 3, type: { name: '' } },
     ],
   })
 
@@ -67,14 +67,48 @@ export default function AddPokemon() {
           item
           container
           sx={{ background: 'white', borderRadius: '5px' }}
-          lg={9}
-          xs={10}
+          xl={7}
+          lg={8}
+          md={9}
+          sm={8}
+          xs={11}
           p={5}
         >
           <Grid container item>
             <FormControl fullWidth>
               <Grid container spacing={2}>
-                <Grid item xs={2}>
+                <Grid item xs={12}>
+                  <Typography
+                    textTransform="uppercase"
+                    variant="h4"
+                    color="#375068"
+                    textAlign="center"
+                  >
+                    Ajouter un nouveau Pokémon
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} md={5} lg={4}>
+                  <TextField
+                    required
+                    fullWidth
+                    label="Nom du pokémon"
+                    variant="outlined"
+                    onChange={(e) =>
+                      setFormValues({
+                        ...formValues,
+                        name: e.target.value,
+                      })
+                    }
+                    value={formValues.name}
+                    placeholder="Nom du pokémon"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography color="#375068" variant="h5">
+                    Général
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
                   <FormControl fullWidth>
                     <InputLabel required>Type 1</InputLabel>
                     <Select
@@ -92,10 +126,6 @@ export default function AddPokemon() {
                               slot: 2,
                               type: { name: formValues.types[1].type.name },
                             },
-                            {
-                              slot: 3,
-                              type: { name: formValues.types[2].type.name },
-                            },
                           ],
                         })
                       }
@@ -112,7 +142,7 @@ export default function AddPokemon() {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
                   <FormControl fullWidth>
                     <InputLabel>Type 2</InputLabel>
                     <Select
@@ -132,50 +162,6 @@ export default function AddPokemon() {
                               slot: 2,
                               type: { name: e.target.value },
                             },
-                            {
-                              slot: 3,
-                              type: { name: formValues.types[2].type.name },
-                            },
-                          ],
-                        })
-                      }
-                      input={<OutlinedInput placeholder="Type" label="Type" />}
-                    >
-                      <MenuItem key={1} value={''}>
-                        Choisir un type
-                      </MenuItem>
-                      {pokeTypes.map((name) => (
-                        <MenuItem key={name} value={name}>
-                          {name}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </Grid>{' '}
-                <Grid item xs={2}>
-                  <FormControl fullWidth>
-                    <InputLabel>Type 3</InputLabel>
-                    <Select
-                      placeholder="Type 3"
-                      label="Type 3"
-                      fullWidth
-                      value={formValues.types[2].type.name}
-                      onChange={(e) =>
-                        setFormValues({
-                          ...formValues,
-                          types: [
-                            {
-                              slot: 1,
-                              type: { name: formValues.types[0].type.name },
-                            },
-                            {
-                              slot: 2,
-                              type: { name: formValues.types[1].type.name },
-                            },
-                            {
-                              slot: 3,
-                              type: { name: e.target.value },
-                            },
                           ],
                         })
                       }
@@ -192,25 +178,11 @@ export default function AddPokemon() {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item>
-                  <TextField
-                    required
-                    label="Nom du pokémon"
-                    variant="outlined"
-                    onChange={(e) =>
-                      setFormValues({
-                        ...formValues,
-                        name: e.target.value,
-                      })
-                    }
-                    value={formValues.name}
-                    placeholder="Nom du pokémon"
-                  />
-                </Grid>
-                <Grid item>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
                   <TextField
                     label="Poids en Kg"
                     required
+                    fullWidth
                     variant="outlined"
                     value={formValues.weight}
                     type="number"
@@ -223,9 +195,10 @@ export default function AddPokemon() {
                     }
                   />
                 </Grid>
-                <Grid item>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
                   <TextField
                     required
+                    fullWidth
                     variant="outlined"
                     label="Taille en cm"
                     value={formValues.height}
@@ -239,9 +212,10 @@ export default function AddPokemon() {
                     }
                   />
                 </Grid>
-                <Grid item>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
                   <TextField
                     required
+                    fullWidth
                     variant="outlined"
                     label="Abilité 1"
                     value={formValues.abilities[0].ability.name}
@@ -264,9 +238,10 @@ export default function AddPokemon() {
                       })
                     }
                   />
-                </Grid>{' '}
-                <Grid item>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4} lg={2}>
                   <TextField
+                    fullWidth
                     required
                     label="Abilité 2"
                     variant="outlined"
@@ -287,9 +262,15 @@ export default function AddPokemon() {
                     }
                   />
                 </Grid>
-                <Grid item>
+                <Grid item xs={12}>
+                  <Typography color="#375068" variant="h5">
+                    Statistiques
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} sm={4}>
                   <TextField
                     required
+                    fullWidth
                     label="HP"
                     variant="outlined"
                     value={formValues.stats[0].base_stat}
@@ -314,9 +295,10 @@ export default function AddPokemon() {
                     }
                   />
                 </Grid>
-                <Grid item>
+                <Grid item xs={12} sm={4}>
                   <TextField
                     required
+                    fullWidth
                     label="Attaque"
                     variant="outlined"
                     value={formValues.stats[1].base_stat}
@@ -344,8 +326,9 @@ export default function AddPokemon() {
                     }
                   />
                 </Grid>
-                <Grid item>
+                <Grid item xs={12} sm={4}>
                   <TextField
+                    fullWidth
                     required
                     variant="outlined"
                     label="Défense"
@@ -373,9 +356,15 @@ export default function AddPokemon() {
                       })
                     }
                   />
+                </Grid>{' '}
+                <Grid item xs={12}>
+                  <Typography color="#375068" variant="h5">
+                    Images
+                  </Typography>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6} md={3}>
                   <TextField
+                    fullWidth
                     required
                     sx={{ width: '100%' }}
                     variant="outlined"
@@ -395,8 +384,9 @@ export default function AddPokemon() {
                     placeholder="URL image avant"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6} md={3}>
                   <TextField
+                    fullWidth
                     required
                     sx={{ width: '100%' }}
                     variant="outlined"
@@ -416,8 +406,9 @@ export default function AddPokemon() {
                     placeholder="URL image arrière"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6} md={3}>
                   <TextField
+                    fullWidth
                     required
                     sx={{ width: '100%' }}
                     variant="outlined"
@@ -437,9 +428,10 @@ export default function AddPokemon() {
                     placeholder="URL image avant shiny"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6} md={3}>
                   <TextField
                     required
+                    fullWidth
                     sx={{ width: '100%' }}
                     variant="outlined"
                     label="URL image arrière shiny"
@@ -462,9 +454,10 @@ export default function AddPokemon() {
             </FormControl>
           </Grid>
           {console.log(formValues)}
-          <Grid container justifyContent="right" mt={3} spacing={2}>
-            <Grid item>
+          <Grid container justifyContent="center" mt={3} spacing={2}>
+            <Grid item xs={12} sm={6} md={4} xl={2.5}>
               <Button
+                fullWidth
                 onClick={() => {
                   pokeDispatch({
                     type: 'addPoke',
@@ -483,8 +476,9 @@ export default function AddPokemon() {
                 Ajouter le pokémon
               </Button>
             </Grid>
-            <Grid item>
+            <Grid item xs={12} sm={6} md={4} xl={2.5}>
               <Button
+                fullWidth
                 href="/"
                 sx={{
                   border: '2px #1c2a38 solid',
