@@ -1,5 +1,14 @@
 import React, { useState } from 'react'
-import { Grid, Button, FormControl, TextField } from '@mui/material'
+import {
+  Grid,
+  Button,
+  FormControl,
+  TextField,
+  Select,
+  InputLabel,
+  MenuItem,
+  OutlinedInput,
+} from '@mui/material'
 import { PokeContext } from '../context/PokeContext'
 import { useNavigate } from 'react-router-dom'
 
@@ -11,14 +20,45 @@ export default function AddPokemon() {
     name: '',
     weight: '',
     height: '',
-    abilities: [{ ability: { name: '' } }],
+    abilities: [{ ability: { name: '' } }, { ability: { name: '' } }],
     stats: [
       { base_stat: '', stat: { name: 'Hp' } },
       { base_stat: '', stat: { name: 'Attack' } },
-
       { base_stat: '', stat: { name: 'Defense' } },
     ],
+    sprites: {
+      back_default: '',
+      back_shiny: '',
+      front_default: '',
+      front_shiny: '',
+    },
+    types: [
+      { slot: 1, type: { name: '' } },
+      { slot: 2, type: { name: '' } },
+      { slot: 3, type: { name: '' } },
+    ],
   })
+
+  const pokeTypes = [
+    'bug',
+    'dragon',
+    'fairy',
+    'fire',
+    'ghost',
+    'ground',
+    'normal',
+    'psychic',
+    'steel',
+    'dark',
+    'electric',
+    'fighting',
+    'flying',
+    'grass',
+    'ice',
+    'poison',
+    'rock',
+    'water',
+  ]
 
   return (
     <>
@@ -34,8 +74,127 @@ export default function AddPokemon() {
           <Grid container item>
             <FormControl fullWidth>
               <Grid container spacing={2}>
+                <Grid item xs={2}>
+                  <FormControl fullWidth>
+                    <InputLabel required>Type 1</InputLabel>
+                    <Select
+                      placeholder="Type 1"
+                      label="Type 1"
+                      fullWidth
+                      required
+                      value={formValues.types[0].type.name}
+                      onChange={(e) =>
+                        setFormValues({
+                          ...formValues,
+                          types: [
+                            { slot: 1, type: { name: e.target.value } },
+                            {
+                              slot: 2,
+                              type: { name: formValues.types[1].type.name },
+                            },
+                            {
+                              slot: 3,
+                              type: { name: formValues.types[2].type.name },
+                            },
+                          ],
+                        })
+                      }
+                      input={<OutlinedInput placeholder="Type" label="Type" />}
+                    >
+                      <MenuItem key={1} value={''}>
+                        Choisir un type
+                      </MenuItem>
+                      {pokeTypes.map((name) => (
+                        <MenuItem key={name} value={name}>
+                          {name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={2}>
+                  <FormControl fullWidth>
+                    <InputLabel>Type 2</InputLabel>
+                    <Select
+                      placeholder="Type 2"
+                      label="Type 2"
+                      fullWidth
+                      value={formValues.types[1].type.name}
+                      onChange={(e) =>
+                        setFormValues({
+                          ...formValues,
+                          types: [
+                            {
+                              slot: 1,
+                              type: { name: formValues.types[0].type.name },
+                            },
+                            {
+                              slot: 2,
+                              type: { name: e.target.value },
+                            },
+                            {
+                              slot: 3,
+                              type: { name: formValues.types[2].type.name },
+                            },
+                          ],
+                        })
+                      }
+                      input={<OutlinedInput placeholder="Type" label="Type" />}
+                    >
+                      <MenuItem key={1} value={''}>
+                        Choisir un type
+                      </MenuItem>
+                      {pokeTypes.map((name) => (
+                        <MenuItem key={name} value={name}>
+                          {name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>{' '}
+                <Grid item xs={2}>
+                  <FormControl fullWidth>
+                    <InputLabel>Type 3</InputLabel>
+                    <Select
+                      placeholder="Type 3"
+                      label="Type 3"
+                      fullWidth
+                      value={formValues.types[2].type.name}
+                      onChange={(e) =>
+                        setFormValues({
+                          ...formValues,
+                          types: [
+                            {
+                              slot: 1,
+                              type: { name: formValues.types[0].type.name },
+                            },
+                            {
+                              slot: 2,
+                              type: { name: formValues.types[1].type.name },
+                            },
+                            {
+                              slot: 3,
+                              type: { name: e.target.value },
+                            },
+                          ],
+                        })
+                      }
+                      input={<OutlinedInput placeholder="Type" label="Type" />}
+                    >
+                      <MenuItem key={1} value={''}>
+                        Choisir un type
+                      </MenuItem>
+                      {pokeTypes.map((name) => (
+                        <MenuItem key={name} value={name}>
+                          {name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
                 <Grid item>
                   <TextField
+                    required
                     variant="outlined"
                     onChange={(e) =>
                       setFormValues({
@@ -49,8 +208,10 @@ export default function AddPokemon() {
                 </Grid>
                 <Grid item>
                   <TextField
+                    required
                     variant="outlined"
                     value={formValues.weight}
+                    type="number"
                     placeholder="Poids"
                     onChange={(e) =>
                       setFormValues({
@@ -62,8 +223,10 @@ export default function AddPokemon() {
                 </Grid>
                 <Grid item>
                   <TextField
+                    required
                     variant="outlined"
                     value={formValues.height}
+                    type="number"
                     placeholder="Taille"
                     onChange={(e) =>
                       setFormValues({
@@ -75,23 +238,57 @@ export default function AddPokemon() {
                 </Grid>
                 <Grid item>
                   <TextField
+                    required
                     variant="outlined"
                     value={formValues.abilities[0].ability.name}
-                    placeholder="Abilités"
+                    placeholder="Abilité 1"
                     onChange={(e) =>
                       setFormValues({
                         ...formValues,
-                        abilities: [{ ability: { name: e.target.value } }],
+                        abilities: [
+                          {
+                            ability: {
+                              name: e.target.value,
+                            },
+                          },
+                          {
+                            ability: {
+                              name: formValues.abilities[0].ability.name,
+                            },
+                          },
+                        ],
+                      })
+                    }
+                  />
+                </Grid>{' '}
+                <Grid item>
+                  <TextField
+                    required
+                    variant="outlined"
+                    value={formValues.abilities[1].ability.name}
+                    placeholder="Abilité 2"
+                    onChange={(e) =>
+                      setFormValues({
+                        ...formValues,
+                        abilities: [
+                          {
+                            ability: {
+                              name: formValues.abilities[0].ability.name,
+                            },
+                          },
+                          { ability: { name: e.target.value } },
+                        ],
                       })
                     }
                   />
                 </Grid>
-
                 <Grid item>
                   <TextField
+                    required
                     variant="outlined"
                     value={formValues.stats[0].base_stat}
                     placeholder="HP"
+                    type="number"
                     onChange={(e) =>
                       setFormValues({
                         ...formValues,
@@ -113,9 +310,11 @@ export default function AddPokemon() {
                 </Grid>
                 <Grid item>
                   <TextField
+                    required
                     variant="outlined"
                     value={formValues.stats[1].base_stat}
                     placeholder="Attaque"
+                    type="number"
                     onChange={(e) =>
                       setFormValues({
                         ...formValues,
@@ -140,9 +339,11 @@ export default function AddPokemon() {
                 </Grid>
                 <Grid item>
                   <TextField
+                    required
                     variant="outlined"
                     value={formValues.stats[2].base_stat}
                     placeholder="Défense"
+                    type="number"
                     onChange={(e) =>
                       setFormValues({
                         ...formValues,
@@ -163,6 +364,86 @@ export default function AddPokemon() {
                         ],
                       })
                     }
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    required
+                    sx={{ width: '100%' }}
+                    variant="outlined"
+                    onChange={(e) =>
+                      setFormValues({
+                        ...formValues,
+                        sprites: {
+                          front_default: e.target.value,
+                          front_shiny: formValues.sprites.front_shiny,
+                          back_default: formValues.sprites.back_default,
+                          back_shiny: formValues.sprites.back_shiny,
+                        },
+                      })
+                    }
+                    value={formValues.sprites.front_default}
+                    placeholder="URL image avant"
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    required
+                    sx={{ width: '100%' }}
+                    variant="outlined"
+                    onChange={(e) =>
+                      setFormValues({
+                        ...formValues,
+                        sprites: {
+                          front_default: formValues.sprites.front_default,
+                          front_shiny: formValues.sprites.front_shiny,
+                          back_default: e.target.value,
+                          back_shiny: formValues.sprites.back_shiny,
+                        },
+                      })
+                    }
+                    value={formValues.sprites.back_default}
+                    placeholder="URL image arrière"
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    required
+                    sx={{ width: '100%' }}
+                    variant="outlined"
+                    onChange={(e) =>
+                      setFormValues({
+                        ...formValues,
+                        sprites: {
+                          front_default: formValues.sprites.front_default,
+                          front_shiny: e.target.value,
+                          back_default: formValues.sprites.back_default,
+                          back_shiny: formValues.sprites.back_shiny,
+                        },
+                      })
+                    }
+                    value={formValues.sprites.front_shiny}
+                    placeholder="URL image avant shiny"
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    required
+                    sx={{ width: '100%' }}
+                    variant="outlined"
+                    onChange={(e) =>
+                      setFormValues({
+                        ...formValues,
+                        sprites: {
+                          front_default: formValues.sprites.front_default,
+                          front_shiny: formValues.sprites.front_shiny,
+                          back_default: formValues.sprites.back_default,
+                          back_shiny: e.target.value,
+                        },
+                      })
+                    }
+                    value={formValues.sprites.back_shiny}
+                    placeholder="URL image arrière shiny"
                   />
                 </Grid>
               </Grid>
