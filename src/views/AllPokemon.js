@@ -3,6 +3,7 @@ import { Grid, Button, Typography } from '@mui/material'
 import PokemonCard from '../components/PokemonCard/PokemonCard'
 import { getAllPokemon, getPokemon } from '../services/usePokeApi'
 import { PokeContext } from '../context/PokeContext'
+import '../assets/style.css'
 
 export default function AllPokemon() {
   const [nextUrl, setNextUrl] = useState('')
@@ -65,7 +66,13 @@ export default function AllPokemon() {
         </Typography>
       ) : (
         <>
-          <Grid container justifyContent="center" alignItems="center" mt={5}>
+          <Grid
+            id="konami"
+            container
+            justifyContent="center"
+            alignItems="center"
+            mt={5}
+          >
             {' '}
             <Grid
               container
@@ -78,16 +85,6 @@ export default function AllPokemon() {
               mb={2}
               justifyContent="left"
             >
-              <Button
-                onClick={() => pokeDispatch({ type: 'delCustomPoke' })}
-                sx={{
-                  border: '2px white solid',
-                  color: 'white',
-                  margin: '10px',
-                }}
-              >
-                RESET
-              </Button>
               <Button
                 sx={{
                   border: '2px white solid',
@@ -118,6 +115,16 @@ export default function AllPokemon() {
               >
                 Ajouter un pokémon
               </Button>
+              <Button
+                onClick={() => pokeDispatch({ type: 'delCustomPoke' })}
+                sx={{
+                  border: '2px white solid',
+                  color: 'white',
+                  margin: '10px',
+                }}
+              >
+                Réinitialiser les pokémon (appel API)
+              </Button>
             </Grid>
             <Grid
               container
@@ -128,6 +135,7 @@ export default function AllPokemon() {
               md={10}
               lg={10}
               xl={8}
+              mt={2}
             >
               {data.map((pokemon, i) => {
                 return (

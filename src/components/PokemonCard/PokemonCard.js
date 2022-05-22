@@ -4,6 +4,7 @@ import { makeStyles } from '@mui/styles'
 import React from 'react'
 import TypeColor from './TypeColor'
 import { Link } from 'react-router-dom'
+import '../../assets/style.css'
 
 const useStyles = makeStyles({
   card: { borderRadius: '5px', background: '#fff' },
@@ -12,7 +13,7 @@ const useStyles = makeStyles({
 export default function PokemonCard({ pokemon }) {
   const classes = useStyles()
   return (
-    <Grid item className={classes.card} p={3}>
+    <Grid item id="pokemonCard" className={classes.card} p={3}>
       <Grid
         container
         justifyContent="center"
@@ -23,7 +24,12 @@ export default function PokemonCard({ pokemon }) {
         }}
       >
         <Grid container justifyContent="center">
-          <img src={pokemon.sprites.front_default} alt="" />
+          <img
+            width="50%"
+            id="pokemonCardImg"
+            src={pokemon.sprites.front_default}
+            alt=""
+          />
         </Grid>
       </Grid>
       <Typography fontFamily="Roboto" className="Card__name" mt={4}>
@@ -58,7 +64,7 @@ export default function PokemonCard({ pokemon }) {
               color: 'white',
               margin: '10px',
               borderRadius: '2px',
-              '&:hover': { backgoundColor: 'white', color: '#1c2a38' },
+              '&:hover': { backgroundColor: 'white', color: '#1c2a38' },
             }}
           >
             Détails
