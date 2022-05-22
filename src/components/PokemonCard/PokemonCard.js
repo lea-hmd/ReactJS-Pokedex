@@ -24,7 +24,7 @@ export default function PokemonCard({ pokemon }) {
         }}
       >
         <Grid container justifyContent="center">
-          <img id="pokemonCardImg" src={pokemon.sprites.front_default} alt="" />
+          <img width='50%' id="pokemonCardImg" src={pokemon.sprites.front_default} alt="" />
         </Grid>
       </Grid>
       <Typography fontFamily="Roboto" className="Card__name" mt={4}>
@@ -59,7 +59,7 @@ export default function PokemonCard({ pokemon }) {
               color: 'white',
               margin: '10px',
               borderRadius: '2px',
-              '&:hover': { backgoundColor: 'white', color: '#1c2a38' },
+              '&:hover': { backgroundColor: 'white', color: '#1c2a38' },
             }}
           >
             Détails
