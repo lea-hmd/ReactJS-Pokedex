@@ -195,6 +195,7 @@ export default function AddPokemon() {
                 <Grid item>
                   <TextField
                     required
+                    label="Nom du pokémon"
                     variant="outlined"
                     onChange={(e) =>
                       setFormValues({
@@ -208,6 +209,7 @@ export default function AddPokemon() {
                 </Grid>
                 <Grid item>
                   <TextField
+                    label="Poids en Kg"
                     required
                     variant="outlined"
                     value={formValues.weight}
@@ -225,6 +227,7 @@ export default function AddPokemon() {
                   <TextField
                     required
                     variant="outlined"
+                    label="Taille en cm"
                     value={formValues.height}
                     type="number"
                     placeholder="Taille"
@@ -240,6 +243,7 @@ export default function AddPokemon() {
                   <TextField
                     required
                     variant="outlined"
+                    label="Abilité 1"
                     value={formValues.abilities[0].ability.name}
                     placeholder="Abilité 1"
                     onChange={(e) =>
@@ -264,6 +268,7 @@ export default function AddPokemon() {
                 <Grid item>
                   <TextField
                     required
+                    label="Abilité 2"
                     variant="outlined"
                     value={formValues.abilities[1].ability.name}
                     placeholder="Abilité 2"
@@ -285,6 +290,7 @@ export default function AddPokemon() {
                 <Grid item>
                   <TextField
                     required
+                    label="HP"
                     variant="outlined"
                     value={formValues.stats[0].base_stat}
                     placeholder="HP"
@@ -311,6 +317,7 @@ export default function AddPokemon() {
                 <Grid item>
                   <TextField
                     required
+                    label="Attaque"
                     variant="outlined"
                     value={formValues.stats[1].base_stat}
                     placeholder="Attaque"
@@ -341,6 +348,7 @@ export default function AddPokemon() {
                   <TextField
                     required
                     variant="outlined"
+                    label="Défense"
                     value={formValues.stats[2].base_stat}
                     placeholder="Défense"
                     type="number"
@@ -371,6 +379,7 @@ export default function AddPokemon() {
                     required
                     sx={{ width: '100%' }}
                     variant="outlined"
+                    label="URL image avant"
                     onChange={(e) =>
                       setFormValues({
                         ...formValues,
@@ -391,6 +400,7 @@ export default function AddPokemon() {
                     required
                     sx={{ width: '100%' }}
                     variant="outlined"
+                    label="URL image arrière"
                     onChange={(e) =>
                       setFormValues({
                         ...formValues,
@@ -411,6 +421,7 @@ export default function AddPokemon() {
                     required
                     sx={{ width: '100%' }}
                     variant="outlined"
+                    label="URL image avant shiny"
                     onChange={(e) =>
                       setFormValues({
                         ...formValues,
@@ -431,6 +442,7 @@ export default function AddPokemon() {
                     required
                     sx={{ width: '100%' }}
                     variant="outlined"
+                    label="URL image arrière shiny"
                     onChange={(e) =>
                       setFormValues({
                         ...formValues,
