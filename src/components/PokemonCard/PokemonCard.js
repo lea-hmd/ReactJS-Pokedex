@@ -24,7 +24,12 @@ export default function PokemonCard({ pokemon }) {
         }}
       >
         <Grid container justifyContent="center">
-          <img width='50%' id="pokemonCardImg" src={pokemon.sprites.front_default} alt="" />
+          <img
+            width="50%"
+            id="pokemonCardImg"
+            src={pokemon.sprites.front_default}
+            alt=""
+          />
         </Grid>
       </Grid>
       <Typography fontFamily="Roboto" className="Card__name" mt={4}>
