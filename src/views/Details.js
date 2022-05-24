@@ -23,12 +23,17 @@ export default function Details() {
   const [thisPokemon, setThisPokemon] = React.useState(null)
 
   React.useEffect(() => {
-    setThisPokemon(
-      pokeState.pokedex.find((pokemon) => pokemon.id === +pokemonId)
-    )
-
+    let tempPokedex =
+      pokeState.customPokedex.length > 0
+        ? pokeState.customPokedex
+        : pokeState.pokedex
+    console.log(tempPokedex[0].id)
+    console.log(pokemonId)
+    setThisPokemon(tempPokedex.find((pokemon) => +pokemon.id === +pokemonId))
+    console.log(thisPokemon)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [pokeState.customPokedex])
+
   return (
     <>
       <Grid container justifyContent="center" alignItems="center">
@@ -76,7 +81,7 @@ export default function Details() {
                     Face antérieure
                   </Typography>
                   <Grid container justifyContent="center">
-                    {thisPokemon && (
+                    {thisPokemon?.sprites && (
                       <img src={thisPokemon?.sprites.front_default} alt="" />
                     )}
                   </Grid>
@@ -92,7 +97,7 @@ export default function Details() {
                     Face postérieure
                   </Typography>
                   <Grid container justifyContent="center">
-                    {thisPokemon && (
+                    {thisPokemon?.sprites && (
                       <img src={thisPokemon?.sprites.back_default} alt="" />
                     )}
                   </Grid>
@@ -120,7 +125,7 @@ export default function Details() {
                     Face antérieure - Shiny
                   </Typography>
                   <Grid container justifyContent="center">
-                    {thisPokemon && (
+                    {thisPokemon?.sprites && (
                       <img src={thisPokemon?.sprites.front_shiny} alt="" />
                     )}
                   </Grid>
@@ -136,7 +141,7 @@ export default function Details() {
                     Face postérieure - Shiny
                   </Typography>
                   <Grid container justifyContent="center">
-                    {thisPokemon && (
+                    {thisPokemon?.sprites && (
                       <img src={thisPokemon?.sprites.back_shiny} alt="" />
                     )}
                   </Grid>
@@ -220,24 +225,25 @@ export default function Details() {
                       >
                         Type :
                       </Typography>
-                      {thisPokemon?.types.map((type) => {
-                        return (
-                          <Typography
-                            color="white"
-                            borderRadius="3px"
-                            p={0.5}
-                            m={1}
-                            key={type.type.name}
-                            sx={{
-                              backgroundColor: TypeColor[type.type.name],
-                              display: 'inline-block',
-                              textTransform: 'capitalize',
-                            }}
-                          >
-                            {type.type.name}
-                          </Typography>
-                        )
-                      })}
+                      {thisPokemon?.types &&
+                        thisPokemon?.types.map((type) => {
+                          return (
+                            <Typography
+                              color="white"
+                              borderRadius="3px"
+                              p={0.5}
+                              m={1}
+                              key={type.type.name}
+                              sx={{
+                                backgroundColor: TypeColor[type.type.name],
+                                display: 'inline-block',
+                                textTransform: 'capitalize',
+                              }}
+                            >
+                              {type.type.name}
+                            </Typography>
+                          )
+                        })}
                     </Grid>
                   </Grid>
                 </Grid>

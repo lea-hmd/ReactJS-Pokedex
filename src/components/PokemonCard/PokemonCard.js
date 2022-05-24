@@ -24,14 +24,14 @@ export default function PokemonCard({ pokemon }) {
         }}
       >
         <Grid container justifyContent="center">
-          <img id="pokemonCardImg" src={pokemon.sprites.front_default} alt="" />
+          <img id="pokemonCardImg" src={pokemon.sprites?.front_default} alt="" />
         </Grid>
       </Grid>
       <Typography fontFamily="Roboto" className="Card__name" mt={4}>
         {pokemon.name}
       </Typography>
       <Grid container justifyContent="center">
-        {pokemon.types.map((type, id) => {
+        {pokemon?.types && pokemon.types.map((type, id) => {
           return (
             <Typography
               color="white"
