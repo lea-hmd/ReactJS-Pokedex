@@ -6,10 +6,6 @@ import { Grid, Button, FormControl, TextField } from '@mui/material'
 import { useParams } from 'react-router-dom'
 
 function ModalForm(props) {
-  const [open, setOpen] = React.useState(false)
-
-  const handleClose = () => setOpen(false)
-
   const style = {
     position: 'absolute',
     top: '50%',
@@ -24,27 +20,42 @@ function ModalForm(props) {
   const { pokemonId } = useParams()
   const { pokeDispatch, pokeState } = React.useContext(PokeContext)
   const [thisPokemon, setThisPokemon] = React.useState(null)
+  const [formValues, setFormValues] = useState(null)
+
   React.useEffect(() => {
-    setThisPokemon(
-      pokeState.pokedex.find((pokemon) => pokemon.id === +pokemonId)
-    )
+    let poke = pokeState.pokedex.find((pokemon) => pokemon.id === +pokemonId)
+    setThisPokemon(poke)
+    setFormValues({
+      id: pokemonId,
+      name: poke.name,
+      weight: poke.weight,
+      height: poke.height,
+      abilities: [{ ability: { name: poke.abilities[0].ability.name } }],
+      stats: [
+        { base_stat: poke.stats[0].base_stat, stat: { name: 'Hp' } },
+        { base_stat: poke.stats[1].base_stat, stat: { name: 'Attack' } },
+        { base_stat: poke.stats[2].base_stat, stat: { name: 'Defense' } },
+        {
+          base_stat: poke.stats[3].base_stat,
+          stat: { name: 'special-attack' },
+        },
+        {
+          base_stat: poke.stats[4].base_stat,
+          stat: { name: 'special-defense' },
+        },
+        { base_stat: poke.stats[5].base_stat, stat: { name: 'speed' } },
+      ],
+      sprites: {
+        back_default: poke.sprites.back_default,
+        front_default: poke.sprites.front_default,
+        back_shiny: poke.sprites.back_shiny,
+        front_shiny: poke.sprites.front_shiny,
+      },
+      types: poke.types,
+    })
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  const [formValues, setFormValues] = useState({
-    id: pokemonId,
-    name: '',
-    weight: '',
-    height: '',
-    abilities: [{ ability: { name: '' } }],
-    stats: [
-      { base_stat: '', stat: { name: 'Hp' } },
-      { base_stat: '', stat: { name: 'Attack' } },
-
-      { base_stat: '', stat: { name: 'Defense' } },
-    ],
-  })
 
   return (
     <Modal
@@ -76,7 +87,7 @@ function ModalForm(props) {
                           name: e.target.value,
                         })
                       }
-                      value={formValues.name}
+                      value={formValues?.name}
                       placeholder={thisPokemon?.name}
                     />
                   </Grid>
@@ -84,7 +95,7 @@ function ModalForm(props) {
                     <TextField
                       label="Poids du Pokemon"
                       variant="outlined"
-                      value={formValues.weight}
+                      value={formValues?.weight}
                       placeholder={thisPokemon?.weight}
                       onChange={(e) =>
                         setFormValues({
@@ -98,7 +109,7 @@ function ModalForm(props) {
                     <TextField
                       label="Taille du Pokemon"
                       variant="outlined"
-                      value={formValues.height}
+                      value={formValues?.height}
                       placeholder={thisPokemon?.height}
                       onChange={(e) =>
                         setFormValues({
@@ -112,7 +123,7 @@ function ModalForm(props) {
                     <TextField
                       label="Abilité du Pokemon"
                       variant="outlined"
-                      value={formValues.abilities[0].ability.name}
+                      value={formValues && formValues.abilities[0].ability.name}
                       placeholder={thisPokemon?.abilities[0].ability.name}
                       onChange={(e) =>
                         setFormValues({
@@ -127,7 +138,7 @@ function ModalForm(props) {
                     <TextField
                       label="HP du Pokemon"
                       variant="outlined"
-                      value={formValues.stats[0].base_stat}
+                      value={formValues?.stats[0].base_stat}
                       placeholder={thisPokemon?.stats[0].base_stat}
                       onChange={(e) =>
                         setFormValues({
@@ -143,6 +154,18 @@ function ModalForm(props) {
                               base_stat: formValues.stats[2].base_stat,
                               stat: { name: 'Defense' },
                             },
+                            {
+                              base_stat: formValues.stats[3].base_stat,
+                              stat: { name: 'special-attack' },
+                            },
+                            {
+                              base_stat: formValues.stats[4].base_stat,
+                              stat: { name: 'special-defense' },
+                            },
+                            {
+                              base_stat: formValues.stats[5].base_stat,
+                              stat: { name: 'speed' },
+                            },
                           ],
                         })
                       }
@@ -152,7 +175,7 @@ function ModalForm(props) {
                     <TextField
                       label="Attaque du Pokemon"
                       variant="outlined"
-                      value={formValues.stats[1].base_stat}
+                      value={formValues?.stats[1].base_stat}
                       placeholder={thisPokemon?.stats[1].base_stat}
                       onChange={(e) =>
                         setFormValues({
@@ -180,7 +203,7 @@ function ModalForm(props) {
                     <TextField
                       label="Défense du Pokemon"
                       variant="outlined"
-                      value={formValues.stats[2].base_stat}
+                      value={formValues?.stats[2].base_stat}
                       placeholder={thisPokemon?.stats[2].base_stat}
                       onChange={(e) =>
                         setFormValues({
@@ -207,7 +230,7 @@ function ModalForm(props) {
                 </Grid>
               </FormControl>
             </Grid>
-            {console.log(formValues)}
+            {console.log(thisPokemon)}
             <Grid container justifyContent="right" mt={3} spacing={2}>
               <Grid item>
                 <Button
@@ -216,7 +239,7 @@ function ModalForm(props) {
                       type: 'upPoke',
                       payload: formValues,
                     })
-                    console.log(formValues)
+                    props.handleClose()
                   }}
                   sx={{
                     border: '2px #1c2a38 solid',
@@ -232,7 +255,7 @@ function ModalForm(props) {
               <Grid item>
                 <Button
                   onClick={() => {
-                    handleClose()
+                    props.handleClose()
                   }}
                   sx={{
                     border: '2px #1c2a38 solid',
@@ -244,7 +267,6 @@ function ModalForm(props) {
                   Retour
                 </Button>
               </Grid>
-              {open && <ModalForm open={open} handleClose={handleClose} />}
             </Grid>
           </Grid>
         </Grid>
