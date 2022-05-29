@@ -231,7 +231,7 @@ export default function AddPokemon() {
                           },
                           {
                             ability: {
-                              name: formValues.abilities[0].ability.name,
+                              name: formValues.abilities[1].ability.name,
                             },
                           },
                         ],
