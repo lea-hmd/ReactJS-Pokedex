@@ -25,8 +25,9 @@ export default function PokemonCard({ pokemon }) {
       >
         <Grid container justifyContent="center">
           <img
+            width="50%"
             id="pokemonCardImg"
-            src={pokemon.sprites?.front_default}
+            src={pokemon.sprites.front_default}
             alt=""
           />
         </Grid>
@@ -64,7 +65,7 @@ export default function PokemonCard({ pokemon }) {
               color: 'white',
               margin: '10px',
               borderRadius: '2px',
-              '&:hover': { backgoundColor: 'white', color: '#1c2a38' },
+              '&:hover': { backgroundColor: 'white', color: '#1c2a38' },
             }}
           >
             Détails
