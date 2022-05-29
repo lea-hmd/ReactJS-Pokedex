@@ -12,9 +12,8 @@ export default function Details() {
   const { pokemonId } = useParams()
 
   const { pokeState, pokeDispatch } = React.useContext(PokeContext)
-
-  const buttonRef = React.useRef(null)
   const navigate = useNavigate()
+
   const [open, setOpen] = React.useState(false)
 
   const handleOpen = () => setOpen(true)
@@ -82,8 +81,12 @@ export default function Details() {
                     Face antérieure
                   </Typography>
                   <Grid container justifyContent="center">
-                    {thisPokemon?.sprites && (
-                      <img src={thisPokemon?.sprites.front_default} alt="" />
+                    {thisPokemon && (
+                      <img
+                        id="pokemonImg"
+                        src={thisPokemon?.sprites.front_default}
+                        alt=""
+                      />
                     )}
                   </Grid>
                 </Grid>
@@ -98,8 +101,12 @@ export default function Details() {
                     Face postérieure
                   </Typography>
                   <Grid container justifyContent="center">
-                    {thisPokemon?.sprites && (
-                      <img src={thisPokemon?.sprites.back_default} alt="" />
+                    {thisPokemon && (
+                      <img
+                        id="pokemonImg"
+                        src={thisPokemon?.sprites.back_default}
+                        alt=""
+                      />
                     )}
                   </Grid>
                 </Grid>{' '}
@@ -126,8 +133,12 @@ export default function Details() {
                     Face antérieure - Shiny
                   </Typography>
                   <Grid container justifyContent="center">
-                    {thisPokemon?.sprites && (
-                      <img src={thisPokemon?.sprites.front_shiny} alt="" />
+                    {thisPokemon && (
+                      <img
+                        id="pokemonImg"
+                        src={thisPokemon?.sprites.front_shiny}
+                        alt=""
+                      />
                     )}
                   </Grid>
                 </Grid>
@@ -142,8 +153,12 @@ export default function Details() {
                     Face postérieure - Shiny
                   </Typography>
                   <Grid container justifyContent="center">
-                    {thisPokemon?.sprites && (
-                      <img src={thisPokemon?.sprites.back_shiny} alt="" />
+                    {thisPokemon && (
+                      <img
+                        id="pokemonImg"
+                        src={thisPokemon?.sprites.back_shiny}
+                        alt=""
+                      />
                     )}
                   </Grid>
                 </Grid>{' '}
@@ -290,46 +305,30 @@ export default function Details() {
                 onClick={() => {
                   handleOpen()
                 }}
-                style={{
+                sx={{
                   border: '2px #1c2a38 solid',
                   backgroundColor: '#1c2a38',
                   color: 'white',
                   margin: '10px',
                   borderRadius: '2px',
-                  '&:hover': { backgoundColor: 'white', color: '#1c2a38' },
+                  '&:hover': { background: 'white', color: '#1c2a38' },
                 }}
               >
                 Modifier
               </Button>
-              <Grid container justifyContent="right">
-                <Button
-                  ref={buttonRef}
-                  style={{
-                    display: 'none',
-                    border: '2px #1c2a38 solid',
-                    backgroundColor: '#1c2a38',
-                    color: 'white',
-                    margin: '10px',
-                    borderRadius: '2px',
-                    '&:hover': { backgoundColor: 'white', color: '#1c2a38' },
-                  }}
-                >
-                  TEST
-                </Button>
-              </Grid>
               <Button
-                href="/"
                 onClick={() => {
                   pokeDispatch({ type: 'delPoke', payload: thisPokemon?.id })
                   navigate('/')
-                }}
+                }
+                }
                 sx={{
                   border: '2px #ff1f1f solid',
                   backgroundColor: '#ff1f1f',
                   color: 'white',
                   margin: '10px',
                   borderRadius: '2px',
-                  '&:hover': { backgoundColor: 'white', color: '#1c2a38' },
+                  '&:hover': { background: 'white', color: '#1c2a38' },
                 }}
               >
                 Supprimer

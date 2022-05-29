@@ -230,7 +230,7 @@ export default function AddPokemon() {
                         },
                         {
                           ability: {
-                            name: formValues.abilities[0].ability.name,
+                            name: formValues.abilities[1].ability.name,
                           },
                         },
                       ],
@@ -474,19 +474,21 @@ export default function AddPokemon() {
             >
               Ajouter le pokémon
             </Button>
+          </Grid>{' '}
+          <Grid item xs={12} sm={6} md={4} xl={2.5}>
+            <Button
+              fullWidth
+              href="/"
+              sx={{
+                border: '2px #1c2a38 solid',
+                color: '#1c2a38',
+                backgroundColor: 'white',
+                borderRadius: '2px',
+              }}
+            >
+              Retour
+            </Button>
           </Grid>
-          <Button
-            fullWidth
-            href="/"
-            sx={{
-              border: '2px #1c2a38 solid',
-              color: '#1c2a38',
-              backgroundColor: 'white',
-              borderRadius: '2px',
-            }}
-          >
-            Retour
-          </Button>
         </Grid>
       </Grid>
     </Grid>

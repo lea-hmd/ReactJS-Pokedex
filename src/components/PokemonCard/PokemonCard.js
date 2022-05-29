@@ -3,7 +3,7 @@ import { Grid, Typography, Button } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import React from 'react'
 import TypeColor from './TypeColor'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import '../../assets/style.css'
 
 const useStyles = makeStyles({
@@ -12,6 +12,8 @@ const useStyles = makeStyles({
 
 export default function PokemonCard({ pokemon }) {
   const classes = useStyles()
+
+  const navigate = useNavigate()
   return (
     <Grid item id="pokemonCard" className={classes.card} p={3}>
       <Grid
@@ -57,20 +59,22 @@ export default function PokemonCard({ pokemon }) {
           })}
       </Grid>
       <Grid container justifyContent="center" mt={2}>
-        <Link to={`/details/${pokemon.id}`}>
-          <Button
-            sx={{
-              border: '2px #1c2a38 solid',
-              backgroundColor: '#1c2a38',
-              color: 'white',
-              margin: '10px',
-              borderRadius: '2px',
-              '&:hover': { backgroundColor: 'white', color: '#1c2a38' },
-            }}
-          >
-            Détails
-          </Button>
-        </Link>
+        <Button
+          onClick={() => navigate(`/details/${pokemon.id}`)}
+          sx={{
+            border: '2px #1c2a38 solid',
+            backgroundColor: '#1c2a38',
+            color: 'white',
+            margin: '10px',
+            borderRadius: '2px',
+            '&:hover': {
+              backgroundColor: 'white',
+              color: '#1c2a38',
+            },
+          }}
+        >
+          Détails
+        </Button>
       </Grid>
     </Grid>
   )
