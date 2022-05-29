@@ -6,6 +6,7 @@ import { PokeContext } from '../context/PokeContext'
 import TypeColor from '../components/PokemonCard/TypeColor'
 import '../assets/style.css'
 import ModalForm from '../components/Modal/Modal'
+import { useNavigate } from 'react-router-dom'
 
 export default function Details() {
   const { pokemonId } = useParams()
@@ -13,7 +14,7 @@ export default function Details() {
   const { pokeState, pokeDispatch } = React.useContext(PokeContext)
 
   const buttonRef = React.useRef(null)
-
+  const navigate = useNavigate()
   const [open, setOpen] = React.useState(false)
 
   const handleOpen = () => setOpen(true)
@@ -318,9 +319,10 @@ export default function Details() {
               </Grid>
               <Button
                 href="/"
-                onClick={() =>
+                onClick={() => {
                   pokeDispatch({ type: 'delPoke', payload: thisPokemon?.id })
-                }
+                  navigate('/')
+                }}
                 sx={{
                   border: '2px #ff1f1f solid',
                   backgroundColor: '#ff1f1f',
