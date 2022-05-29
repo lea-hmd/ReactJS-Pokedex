@@ -10,13 +10,20 @@
   }
 }
 
-#pokemonCard:hover {
+#blueCard:hover {
   cursor: pointer;
   animation: scale 1.5s infinite;
-  border: solid 3px red;
+  border: solid 3px #005d8f;
 }
 
-#pokemonCard,
+#redCard:hover {
+  cursor: pointer;
+  animation: scale 1.5s infinite;
+  border: solid 3px #c41010;
+}
+
+#blueCard,
+#redCard,
 #pokemonImg {
   cursor: pointer;
 }

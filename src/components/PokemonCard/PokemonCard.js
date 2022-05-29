@@ -5,6 +5,7 @@ import React from 'react'
 import TypeColor from './TypeColor'
 import { useNavigate } from 'react-router-dom'
 import '../../assets/style.css'
+import { PokeContext } from '../../context/PokeContext'
 
 const useStyles = makeStyles({
   card: { borderRadius: '5px', background: '#fff' },
@@ -12,15 +13,20 @@ const useStyles = makeStyles({
 
 export default function PokemonCard({ pokemon }) {
   const classes = useStyles()
-
+  const { pokeState } = React.useContext(PokeContext)
   const navigate = useNavigate()
   return (
-    <Grid item id="pokemonCard" className={classes.card} p={3}>
+    <Grid
+      item
+      id={pokeState.theme === 'light' ? 'blueCard' : 'redCard'}
+      className={classes.card}
+      p={3}
+    >
       <Grid
         container
         justifyContent="center"
+        backgroundColor={pokeState.theme === 'light' ? '#005d8f' : '#c41010'}
         sx={{
-          backgroundColor: '#1c2a38',
           borderRadius: '5px',
           padding: '25px 0px',
         }}

@@ -37,7 +37,6 @@ export default function Details() {
   return (
     <>
       <Grid container justifyContent="center" alignItems="center">
-        {' '}
         <Grid
           item
           container
@@ -53,7 +52,7 @@ export default function Details() {
                 textTransform="capitalize"
                 textAlign="center"
                 fontFamily="Pokemon"
-                color="#375068"
+                color={pokeState.theme === 'light' ? '#005d8f' : '#c41010'}
               >
                 {thisPokemon?.name}
               </Typography>
@@ -61,9 +60,11 @@ export default function Details() {
             <Grid item lg={5} container alignItems="center">
               <Grid
                 container
-                justifyContent="center"
+                justifyContent="center "
+                backgroundColor={
+                  pokeState.theme === 'light' ? '#005d8f' : '#c41010'
+                }
                 sx={{
-                  backgroundColor: '#1c2a38',
                   borderRadius: '5px',
                   padding: '25px 0px',
                 }}
@@ -114,8 +115,10 @@ export default function Details() {
               <Grid
                 container
                 justifyContent="center"
+                backgroundColor={
+                  pokeState.theme === 'light' ? '#005d8f' : '#c41010'
+                }
                 sx={{
-                  backgroundColor: '#1c2a38',
                   borderRadius: '5px',
                   padding: '25px 0px',
                 }}
@@ -320,8 +323,7 @@ export default function Details() {
                 onClick={() => {
                   pokeDispatch({ type: 'delPoke', payload: thisPokemon?.id })
                   navigate('/')
-                }
-                }
+                }}
                 sx={{
                   border: '2px #ff1f1f solid',
                   backgroundColor: '#ff1f1f',
