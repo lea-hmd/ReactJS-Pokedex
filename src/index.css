@@ -1,17 +1,4 @@
-body {
-  margin: 0;
-  background-color: #375068;
-}
-
 @font-face {
   font-family: 'Pokemon';
   src: local('Pokemon'), url('./fonts/EvioliteRegular.ttf') format('truetype');
-}
-
-.bodyBlue {
-  background-color: #005d8f;
-}
-
-.bodyRed {
-  background-color: #c41010;
 }

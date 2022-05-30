@@ -86,26 +86,6 @@ export default function AllPokemon() {
               justifyContent="left"
             >
               <Button
-                sx={{
-                  border: '2px white solid',
-                  color: 'white',
-                  margin: '10px',
-                  background: '#c41010',
-                }}
-              >
-                Version Rouge
-              </Button>
-              <Button
-                sx={{
-                  border: '2px white solid',
-                  color: 'white',
-                  margin: '10px',
-                  background: '#005d8f',
-                }}
-              >
-                Version Bleue
-              </Button>
-              <Button
                 href="/add-pokemon"
                 sx={{
                   border: '2px white solid',

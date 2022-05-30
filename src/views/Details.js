@@ -6,13 +6,13 @@ import { PokeContext } from '../context/PokeContext'
 import TypeColor from '../components/PokemonCard/TypeColor'
 import '../assets/style.css'
 import ModalForm from '../components/Modal/Modal'
+import { useNavigate } from 'react-router-dom'
 
 export default function Details() {
   const { pokemonId } = useParams()
 
   const { pokeState, pokeDispatch } = React.useContext(PokeContext)
-
-  const buttonRef = React.useRef(null)
+  const navigate = useNavigate()
 
   const [open, setOpen] = React.useState(false)
 
@@ -23,16 +23,20 @@ export default function Details() {
   const [thisPokemon, setThisPokemon] = React.useState(null)
 
   React.useEffect(() => {
-    setThisPokemon(
-      pokeState.pokedex.find((pokemon) => pokemon.id === +pokemonId)
-    )
-
+    let tempPokedex =
+      pokeState.customPokedex.length > 0
+        ? pokeState.customPokedex
+        : pokeState.pokedex
+    console.log(tempPokedex[0].id)
+    console.log(pokemonId)
+    setThisPokemon(tempPokedex.find((pokemon) => +pokemon.id === +pokemonId))
+    console.log(thisPokemon)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [pokeState.customPokedex])
+
   return (
     <>
       <Grid container justifyContent="center" alignItems="center">
-        {' '}
         <Grid
           item
           container
@@ -48,7 +52,7 @@ export default function Details() {
                 textTransform="capitalize"
                 textAlign="center"
                 fontFamily="Pokemon"
-                color="#375068"
+                color={pokeState.theme === 'light' ? '#005d8f' : '#c41010'}
               >
                 {thisPokemon?.name}
               </Typography>
@@ -56,9 +60,11 @@ export default function Details() {
             <Grid item lg={5} container alignItems="center">
               <Grid
                 container
-                justifyContent="center"
+                justifyContent="center "
+                backgroundColor={
+                  pokeState.theme === 'light' ? '#005d8f' : '#c41010'
+                }
                 sx={{
-                  backgroundColor: '#1c2a38',
                   borderRadius: '5px',
                   padding: '25px 0px',
                 }}
@@ -77,7 +83,11 @@ export default function Details() {
                   </Typography>
                   <Grid container justifyContent="center">
                     {thisPokemon && (
-                      <img src={thisPokemon?.sprites.front_default} alt="" />
+                      <img
+                        id="pokemonImg"
+                        src={thisPokemon?.sprites.front_default}
+                        alt=""
+                      />
                     )}
                   </Grid>
                 </Grid>
@@ -93,7 +103,11 @@ export default function Details() {
                   </Typography>
                   <Grid container justifyContent="center">
                     {thisPokemon && (
-                      <img src={thisPokemon?.sprites.back_default} alt="" />
+                      <img
+                        id="pokemonImg"
+                        src={thisPokemon?.sprites.back_default}
+                        alt=""
+                      />
                     )}
                   </Grid>
                 </Grid>{' '}
@@ -101,8 +115,10 @@ export default function Details() {
               <Grid
                 container
                 justifyContent="center"
+                backgroundColor={
+                  pokeState.theme === 'light' ? '#005d8f' : '#c41010'
+                }
                 sx={{
-                  backgroundColor: '#1c2a38',
                   borderRadius: '5px',
                   padding: '25px 0px',
                 }}
@@ -121,7 +137,11 @@ export default function Details() {
                   </Typography>
                   <Grid container justifyContent="center">
                     {thisPokemon && (
-                      <img src={thisPokemon?.sprites.front_shiny} alt="" />
+                      <img
+                        id="pokemonImg"
+                        src={thisPokemon?.sprites.front_shiny}
+                        alt=""
+                      />
                     )}
                   </Grid>
                 </Grid>
@@ -137,7 +157,11 @@ export default function Details() {
                   </Typography>
                   <Grid container justifyContent="center">
                     {thisPokemon && (
-                      <img src={thisPokemon?.sprites.back_shiny} alt="" />
+                      <img
+                        id="pokemonImg"
+                        src={thisPokemon?.sprites.back_shiny}
+                        alt=""
+                      />
                     )}
                   </Grid>
                 </Grid>{' '}
@@ -220,24 +244,25 @@ export default function Details() {
                       >
                         Type :
                       </Typography>
-                      {thisPokemon?.types.map((type) => {
-                        return (
-                          <Typography
-                            color="white"
-                            borderRadius="3px"
-                            p={0.5}
-                            m={1}
-                            key={type.type.name}
-                            sx={{
-                              backgroundColor: TypeColor[type.type.name],
-                              display: 'inline-block',
-                              textTransform: 'capitalize',
-                            }}
-                          >
-                            {type.type.name}
-                          </Typography>
-                        )
-                      })}
+                      {thisPokemon?.types &&
+                        thisPokemon?.types.map((type) => {
+                          return (
+                            <Typography
+                              color="white"
+                              borderRadius="3px"
+                              p={0.5}
+                              m={1}
+                              key={type.type.name}
+                              sx={{
+                                backgroundColor: TypeColor[type.type.name],
+                                display: 'inline-block',
+                                textTransform: 'capitalize',
+                              }}
+                            >
+                              {type.type.name}
+                            </Typography>
+                          )
+                        })}
                     </Grid>
                   </Grid>
                 </Grid>
@@ -283,45 +308,29 @@ export default function Details() {
                 onClick={() => {
                   handleOpen()
                 }}
-                style={{
+                sx={{
                   border: '2px #1c2a38 solid',
                   backgroundColor: '#1c2a38',
                   color: 'white',
                   margin: '10px',
                   borderRadius: '2px',
-                  '&:hover': { backgoundColor: 'white', color: '#1c2a38' },
+                  '&:hover': { background: 'white', color: '#1c2a38' },
                 }}
               >
                 Modifier
               </Button>
-              <Grid container justifyContent="right">
-                <Button
-                  ref={buttonRef}
-                  style={{
-                    display: 'none',
-                    border: '2px #1c2a38 solid',
-                    backgroundColor: '#1c2a38',
-                    color: 'white',
-                    margin: '10px',
-                    borderRadius: '2px',
-                    '&:hover': { backgoundColor: 'white', color: '#1c2a38' },
-                  }}
-                >
-                  TEST
-                </Button>
-              </Grid>
               <Button
-                href="/"
-                onClick={() =>
+                onClick={() => {
                   pokeDispatch({ type: 'delPoke', payload: thisPokemon?.id })
-                }
+                  navigate('/')
+                }}
                 sx={{
                   border: '2px #ff1f1f solid',
                   backgroundColor: '#ff1f1f',
                   color: 'white',
                   margin: '10px',
                   borderRadius: '2px',
-                  '&:hover': { backgoundColor: 'white', color: '#1c2a38' },
+                  '&:hover': { background: 'white', color: '#1c2a38' },
                 }}
               >
                 Supprimer

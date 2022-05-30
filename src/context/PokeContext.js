@@ -47,10 +47,13 @@ function pokeReducer(state, action) {
     }
 
     case 'upPoke': {
+      var tempPokedex =
+        state.customPokedex.length > 0 ? state.customPokedex : state.pokedex
       return {
         ...state,
-        customPokedex: state.customPokedex.map((pokemon) => {
-          if (pokemon.id === action.payload.id) {
+
+        customPokedex: tempPokedex.map((pokemon) => {
+          if (parseInt(pokemon.id) === parseInt(action.payload.id)) {
             return action.payload
           } else {
             return pokemon

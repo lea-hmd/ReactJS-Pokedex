@@ -1,22 +1,29 @@
 #pokemonImg:hover {
   animation: rotate 2s infinite;
   cursor: pointer;
-  transform: scale(1.25);
+  transform: scale(1.1);
 }
 
 @keyframes rotate {
-  100% {
-    transform: rotate(180deg);
+  50% {
+    transform: rotate(-30deg);
   }
 }
 
-#pokemonCard:hover {
+#blueCard:hover {
   cursor: pointer;
   animation: scale 1.5s infinite;
-  border: solid 3px red;
+  border: solid 3px #005d8f;
 }
 
-#pokemonCard,
+#redCard:hover {
+  cursor: pointer;
+  animation: scale 1.5s infinite;
+  border: solid 3px #c41010;
+}
+
+#blueCard,
+#redCard,
 #pokemonImg {
   cursor: pointer;
 }
