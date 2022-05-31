@@ -9,6 +9,7 @@ import AddPokemon from './views/AddPokemon'
 import CssBaseline from '@mui/material/CssBaseline'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { PokeContext } from './context/PokeContext'
+import Konami from './components/Common/Konami'
 
 const blueTheme = createTheme({
   components: {
@@ -41,6 +42,7 @@ function App() {
     <ThemeProvider theme={pokeState.theme === 'light' ? redTheme : blueTheme}>
       <CssBaseline />
       <Router>
+        <Konami />
         <Header />
         <Routes>
           <Route exact path="/" element={<AllPokemon />} />{' '}

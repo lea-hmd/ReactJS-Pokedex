@@ -6,7 +6,7 @@
 
 @keyframes rotate {
   50% {
-    transform: rotate(-30deg);
+    transform: rotate(180deg);
   }
 }
 
@@ -34,14 +34,33 @@
   }
 }
 
-#konam i {
-  animation: rotate 2s infinite;
+.konami {
+  animation: pokemonSection 1s infinite;
   cursor: pointer;
-  transform: scale(2);
+  transform: scale(1.5);
+}
+#konamiImg {
+  cursor: pointer;
+  animation: scaleKonami 1.5s infinite;
 }
 
-#titl e {
-  animation: rotate 2s infinite;
+@keyframes scaleKonami {
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.titleKonami {
+  animation: rotate 1s infinite;
   cursor: pointer;
-  transform: scale(2);
+  transform: scale(5);
+}
+
+@keyframes pokemonSection {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
 }
