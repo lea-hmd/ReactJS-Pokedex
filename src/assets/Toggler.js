@@ -54,7 +54,6 @@ const SwitchThemeButton = () => {
         control={
           <StyledSwitch
             checked={pokeState.theme === 'light'}
-            defaultChecked
             onChange={() => {
               pokeDispatch({ type: 'switchTheme', payload: pokeState.theme })
             }}
