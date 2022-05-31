@@ -230,7 +230,6 @@ function ModalForm(props) {
                 </Grid>
               </FormControl>
             </Grid>
-            {console.log(thisPokemon)}
             <Grid container justifyContent="right" mt={3} spacing={2}>
               <Grid item>
                 <Button
