@@ -1,0 +1,66 @@
+#pokemonImg:hover {
+  animation: rotate 2s infinite;
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+@keyframes rotate {
+  50% {
+    transform: rotate(180deg);
+  }
+}
+
+#blueCard:hover {
+  cursor: pointer;
+  animation: scale 1.5s infinite;
+  border: solid 3px #005d8f;
+}
+
+#redCard:hover {
+  cursor: pointer;
+  animation: scale 1.5s infinite;
+  border: solid 3px #c41010;
+}
+
+#blueCard,
+#redCard,
+#pokemonImg {
+  cursor: pointer;
+}
+
+@keyframes scale {
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.konami {
+  animation: pokemonSection 1s infinite;
+  cursor: pointer;
+  transform: scale(1.5);
+}
+#konamiImg {
+  cursor: pointer;
+  animation: scaleKonami 1.5s infinite;
+}
+
+@keyframes scaleKonami {
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.titleKonami {
+  animation: rotate 1s infinite;
+  cursor: pointer;
+  transform: scale(5);
+}
+
+@keyframes pokemonSection {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

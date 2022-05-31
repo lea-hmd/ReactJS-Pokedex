@@ -24,7 +24,14 @@ function pokeReducer(state, action) {
         pokedex: data,
       }
     }
-
+    case 'addPoke': {
+      const data =
+        state.customPokedex.length === 0 ? state.pokedex : state.customPokedex
+      return {
+        ...state,
+        customPokedex: [...data, action.payload],
+      }
+    }
     case 'delPoke': {
       const data =
         state.customPokedex.length === 0 ? state.pokedex : state.customPokedex
@@ -42,9 +49,18 @@ function pokeReducer(state, action) {
     }
 
     case 'upPoke': {
+      var tempPokedex =
+        state.customPokedex.length > 0 ? state.customPokedex : state.pokedex
       return {
         ...state,
-        customPokedex: [],
+
+        customPokedex: tempPokedex.map((pokemon) => {
+          if (parseInt(pokemon.id) === parseInt(action.payload.id)) {
+            return action.payload
+          } else {
+            return pokemon
+          }
+        }),
       }
     }
 
