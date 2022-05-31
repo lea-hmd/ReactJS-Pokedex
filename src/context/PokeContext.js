@@ -25,8 +25,8 @@ function pokeReducer(state, action) {
       }
     }
     case 'addPoke': {
-       const data =
-         state.customPokedex.length === 0 ? state.pokedex : state.customPokedex
+      const data =
+        state.customPokedex.length === 0 ? state.pokedex : state.customPokedex
       return {
         ...state,
         customPokedex: [...data, action.payload],
