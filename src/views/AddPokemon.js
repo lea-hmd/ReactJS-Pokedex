@@ -452,7 +452,6 @@ export default function AddPokemon() {
             </Grid>
           </FormControl>
         </Grid>
-        {console.log(formValues)}
         <Grid container justifyContent="center" mt={3} spacing={2}>
           <Grid item xs={12} sm={6} md={4} xl={2.5}>
             <Button

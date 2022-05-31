@@ -1,12 +1,12 @@
 import React from 'react'
 import { styled } from '@mui/material/styles'
 import { PokeContext } from '../context/PokeContext'
-import { FormControlLabel, Switch } from '@mui/material'
+import { FormControlLabel, Switch, Grid } from '@mui/material'
 
 const StyledSwitch = styled(Switch)(({ theme }) => ({
   width: 100,
-  height: 52,
-  padding: 7,
+  height: 50,
+  padding: 10,
   '& .MuiSwitch-switchBase': {
     margin: 1,
     padding: 0,
@@ -24,8 +24,8 @@ const StyledSwitch = styled(Switch)(({ theme }) => ({
     },
   },
   '& .MuiSwitch-thumb': {
-    width: 50,
-    height: 50,
+    width: 47,
+    height: 47,
     '&:before': {
       backgroundImage: `url('https://upload.wikimedia.org/wikipedia/commons/5/53/Pok%C3%A9_Ball_icon.svg')`,
       content: "''",
@@ -49,19 +49,18 @@ const SwitchThemeButton = () => {
   const { pokeState, pokeDispatch } = React.useContext(PokeContext)
 
   return (
-    <>
+    <Grid container justifyContent="center">
       <FormControlLabel
         control={
           <StyledSwitch
             checked={pokeState.theme === 'light'}
-            defaultChecked
             onChange={() => {
               pokeDispatch({ type: 'switchTheme', payload: pokeState.theme })
             }}
           />
         }
       />
-    </>
+    </Grid>
   )
 }
 
