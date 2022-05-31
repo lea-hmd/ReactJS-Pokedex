@@ -14,10 +14,11 @@ import { useNavigate } from 'react-router-dom'
 import { Typography } from '@mui/material'
 
 export default function AddPokemon() {
-  const { pokeDispatch } = React.useContext(PokeContext)
+  const { pokeState, pokeDispatch } = React.useContext(PokeContext)
   const navigate = useNavigate()
 
   const [formValues, setFormValues] = useState({
+    id: 0,
     name: '',
     weight: '',
     height: '',
@@ -459,7 +460,13 @@ export default function AddPokemon() {
               onClick={() => {
                 pokeDispatch({
                   type: 'addPoke',
-                  payload: formValues,
+                  payload: {
+                    ...formValues,
+                    id:
+                      pokeState.customPokedex.length === 0
+                        ? pokeState.pokedex.slice(-1)[0].id + 1
+                        : pokeState.customPokedex.slice(-1)[0].id + 1,
+                  },
                 })
                 navigate('/')
               }}

@@ -27,10 +27,9 @@ export default function Details() {
       pokeState.customPokedex.length > 0
         ? pokeState.customPokedex
         : pokeState.pokedex
-    console.log(tempPokedex[0].id)
-    console.log(pokemonId)
+
     setThisPokemon(tempPokedex.find((pokemon) => +pokemon.id === +pokemonId))
-    console.log(thisPokemon)
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pokeState.customPokedex])
 

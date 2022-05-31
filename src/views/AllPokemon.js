@@ -21,8 +21,8 @@ export default function AllPokemon() {
       let response = await getAllPokemon(initialUrl)
       setNextUrl(response.next)
       setPreviousUrl(response.previous)
-      let pokemon = await loadingPokemon(response.results)
-      console.log(pokemon)
+      await loadingPokemon(response.results)
+
       setLoading(false)
     }
     fetchData()
