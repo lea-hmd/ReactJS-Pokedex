@@ -23,7 +23,12 @@ function ModalForm(props) {
   const [formValues, setFormValues] = useState(null)
 
   React.useEffect(() => {
-    let poke = pokeState.pokedex.find((pokemon) => pokemon.id === +pokemonId)
+    const data =
+      pokeState.customPokedex.length === 0
+        ? pokeState.pokedex
+        : pokeState.customPokedex
+    let poke = data.find((pokemon) => +pokemon.id === +pokemonId)
+
     setThisPokemon(poke)
     setFormValues({
       id: pokemonId,
@@ -36,14 +41,14 @@ function ModalForm(props) {
         { base_stat: poke.stats[1].base_stat, stat: { name: 'Attack' } },
         { base_stat: poke.stats[2].base_stat, stat: { name: 'Defense' } },
         {
-          base_stat: poke.stats[3].base_stat,
+          base_stat: poke.stats[3]?.base_stat,
           stat: { name: 'special-attack' },
         },
         {
-          base_stat: poke.stats[4].base_stat,
+          base_stat: poke.stats[4]?.base_stat,
           stat: { name: 'special-defense' },
         },
-        { base_stat: poke.stats[5].base_stat, stat: { name: 'speed' } },
+        { base_stat: poke.stats[5]?.base_stat, stat: { name: 'speed' } },
       ],
       sprites: {
         back_default: poke.sprites.back_default,
