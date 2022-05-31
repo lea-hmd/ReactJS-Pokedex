@@ -16,7 +16,7 @@ export default function Header() {
           <CardMedia component="img" image="/Pokedex Header.png" alt="" />
         </Grid>
       </Grid>
-      <Grid container justifyContent="center" spacing={2} mt={5}>
+      <Grid container justifyContent="center" spacing={2} m={5}>
         <Grid item xs={12} md={6}>
           <SwitchThemeButton />
         </Grid>
